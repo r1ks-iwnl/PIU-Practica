@@ -11,5 +11,9 @@ namespace Main
 		{
 
 		}
+		public Masina(string model, int an)
+		{
+
+		}
 	}
 }

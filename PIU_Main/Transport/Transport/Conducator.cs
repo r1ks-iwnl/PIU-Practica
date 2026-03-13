@@ -12,5 +12,9 @@ namespace Main
 		{
 
 		}
+		public Conducator(string nume, string dataNastere, string dataAngajare)
+		{
+
+		}
 	}
 }
