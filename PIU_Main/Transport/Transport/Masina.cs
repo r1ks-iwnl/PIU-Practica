@@ -1,19 +1,24 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Main
 {
 	class Masina
 	{
-		private string model;
-		private int an;
-		private int distParcursa;
-		//private Conducatori[] condDisp...
+		public required string model { get; init; }
+		public required int an { get; init; }
+		public int distParcursa { get; }
+		private List<Conducator> condDisp;
 
-		public Masina()
-		{
-
-		}
+		[SetsRequiredMembers]
 		public Masina(string model, int an)
 		{
+			this.model = model;
+			this.an = an;
+		}
 
+		public void AdaugaConducator(Conducator condNou)
+		{
+			condDisp.Add(condNou);
 		}
 	}
 }
