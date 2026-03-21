@@ -17,6 +17,14 @@ namespace Masina
 			An = an;
 		}
 
+		public static Masina AdaugaMasina()
+		{
+			Console.WriteLine("Introdu model: ");
+			string model = Console.ReadLine();
+			Console.WriteLine("Introdu an: ");
+			int.TryParse(Console.ReadLine(), out int an);
+			return new Masina(model, an);
+		}
 		public void AdaugaConducator(ConducatorModel condNou)
 		{
 			_condDisp.Add(condNou);

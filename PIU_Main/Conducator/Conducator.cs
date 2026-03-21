@@ -18,6 +18,17 @@ namespace Conducator
 			DataAngajare = dataAngajare;
 		}
 
+		public static Conducator AdaugaConducator()
+		{
+			Console.WriteLine("Introdu nume: ");
+			string nume = Console.ReadLine();
+			Console.WriteLine("Introdu data nastere: ");
+			string dataNastere = Console.ReadLine();
+			Console.WriteLine("Introdu data angajare: ");
+			string dataAngajare = Console.ReadLine();
+			return new Conducator(nume, dataNastere, dataAngajare);
+		}
+
 		public void MasinaNoua(string modelMasina)
 		{
 			_masiniConduse.Add(modelMasina);
