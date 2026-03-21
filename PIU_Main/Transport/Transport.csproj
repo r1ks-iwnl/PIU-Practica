@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Conducator\Conducator.csproj" />
+    <ProjectReference Include="..\Masina\Masina.csproj" />
+    <ProjectReference Include="..\Cursa\Cursa.csproj" />
+  </ItemGroup>
+
 </Project>
