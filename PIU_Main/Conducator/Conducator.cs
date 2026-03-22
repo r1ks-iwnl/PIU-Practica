@@ -29,6 +29,15 @@ namespace Conducator
 			return new Conducator(nume, dataNastere, dataAngajare);
 		}
 
+		public static void AfisareConducatori(List<Conducator> conducatori)
+		{
+			int i = 0;
+			foreach(Conducator conducator in conducatori)
+			{
+				Console.WriteLine(i + ": " + conducator.Nume + " " + conducator.DataAngajare + " " + conducator.DataNastere);
+				i++;
+			}
+		}
 		public void MasinaNoua(string modelMasina)
 		{
 			_masiniConduse.Add(modelMasina);

@@ -25,6 +25,16 @@ namespace Masina
 			int.TryParse(Console.ReadLine(), out int an);
 			return new Masina(model, an);
 		}
+		public static void AfisareMasini(List<Masina> masini)
+		{
+			int i = 0;
+			foreach (Masina masina in masini)
+			{
+				Console.WriteLine(i + ": " + masina.Model + " " + masina.An + " " + masina.DistParcursa);
+				i++;
+			}
+		}
+
 		public void AdaugaConducator(ConducatorModel condNou)
 		{
 			_condDisp.Add(condNou);
