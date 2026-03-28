@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AdministrareDate\AdministrareDate.csproj" />
     <ProjectReference Include="..\Conducator\Conducator.csproj" />
   </ItemGroup>
 

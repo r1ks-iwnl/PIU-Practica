@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Conducator;
+using System.Diagnostics.CodeAnalysis;
+using AdministrareDateModel = AdministrareDate.AdministrareDate;
 using ConducatorModel = Conducator.Conducator;
 
 namespace Masina
@@ -25,14 +27,24 @@ namespace Masina
 			int.TryParse(Console.ReadLine(), out int an);
 			return new Masina(model, an);
 		}
-		public static void AfisareMasini(List<Masina> masini)
+		public static Masina? AfisareMasini(List<Masina> masini)
 		{
-			int i = 0;
-			foreach (Masina masina in masini)
+			AdministrareDateModel.AfiseazaListaDateMembre(masini, m => $"{m.Model} - {m.An} - {m.DistParcursa}");
+
+			if (AdministrareDateModel.TryCautareFromClassListByMember(masini, "masini", m => m.Model, out List<Masina> rezultat))
 			{
-				Console.WriteLine(i + ": " + masina.Model + " " + masina.An + " " + masina.DistParcursa);
-				i++;
+				AdministrareDateModel.AfiseazaListaDateMembre(rezultat, m => $"{m.Model} - {m.An} - {m.DistParcursa}");
+				return SelectareMasina(rezultat);
 			}
+			return SelectareMasina(masini);
+		}
+		public static Masina? SelectareMasina(List<Masina> masini)
+		{
+			if (!AdministrareDateModel.TrySelectFromClassList(masini, "masina", out var masina))
+			{
+				return null;
+			}
+			return masina;
 		}
 
 		public void AdaugaConducator(ConducatorModel condNou)

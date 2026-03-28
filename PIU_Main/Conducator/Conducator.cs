@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using AdministrareDateModel = AdministrareDate.AdministrareDate;
 
 namespace Conducator
 {
@@ -29,15 +30,26 @@ namespace Conducator
 			return new Conducator(nume, dataNastere, dataAngajare);
 		}
 
-		public static void AfisareConducatori(List<Conducator> conducatori)
+		public static Conducator? AfisareConducatori(List<Conducator> conducatori)
 		{
-			int i = 0;
-			foreach(Conducator conducator in conducatori)
+			AdministrareDateModel.AfiseazaListaDateMembre(conducatori, c => $"{c.Nume} - {c.DataAngajare} - {c.DataNastere}");
+
+			if (AdministrareDateModel.TryCautareFromClassListByMember(conducatori, "conducatori", c => c.Nume, out List<Conducator> rezultat))
 			{
-				Console.WriteLine(i + ": " + conducator.Nume + " " + conducator.DataAngajare + " " + conducator.DataNastere);
-				i++;
+				AdministrareDateModel.AfiseazaListaDateMembre(rezultat, c => $"{c.Nume} - {c.DataAngajare} - {c.DataNastere}");
+				return SelectareConducator(rezultat);
 			}
+			return SelectareConducator(conducatori);
 		}
+		public static Conducator? SelectareConducator(List<Conducator> conducatori)
+		{
+			if(!AdministrareDateModel.TrySelectFromClassList(conducatori, "conducator", out var conducator))
+			{
+				return null;
+			}
+			return conducator;
+		}
+
 		public void MasinaNoua(string modelMasina)
 		{
 			_masiniConduse.Add(modelMasina);

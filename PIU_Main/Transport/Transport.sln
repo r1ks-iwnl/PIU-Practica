@@ -4,12 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.14.37012.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transport", "Transport.csproj", "{4826157C-8377-44A5-A940-3AC03F6A194E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{658A9DE7-A7F9-4FC1-B5DB-AEC1660F383F} = {658A9DE7-A7F9-4FC1-B5DB-AEC1660F383F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conducator", "..\Conducator\Conducator.csproj", "{0B506BFB-BA33-4211-9E8E-1667CFDEAE4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cursa", "..\Cursa\Cursa.csproj", "{7B3D5D0A-A74B-48B5-B7C8-FE6D190597EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masina", "..\Masina\Masina.csproj", "{8C7C230D-01D0-48FB-B6DE-7B35AA718B36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrareDate", "..\AdministrareDate\AdministrareDate.csproj", "{658A9DE7-A7F9-4FC1-B5DB-AEC1660F383F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +38,10 @@ Global
 		{8C7C230D-01D0-48FB-B6DE-7B35AA718B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C7C230D-01D0-48FB-B6DE-7B35AA718B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C7C230D-01D0-48FB-B6DE-7B35AA718B36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658A9DE7-A7F9-4FC1-B5DB-AEC1660F383F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658A9DE7-A7F9-4FC1-B5DB-AEC1660F383F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658A9DE7-A7F9-4FC1-B5DB-AEC1660F383F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658A9DE7-A7F9-4FC1-B5DB-AEC1660F383F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

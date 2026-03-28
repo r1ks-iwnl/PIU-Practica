@@ -8,8 +8,9 @@ namespace Main
 	{
 		static void Main()
 		{
-			MasinaModel masina = null;
-			ConducatorModel conducator = null;
+			MasinaModel? masina = null;
+			ConducatorModel? conducator = null;
+			CursaModel? cursa = null;
 			List<ConducatorModel> listaConducatori = new();
 			List<MasinaModel> listaMasini = new();
 			List<CursaModel> listaCursa = new();
@@ -19,8 +20,6 @@ namespace Main
 				Console.WriteLine("B. Adauga conducator");
 				Console.WriteLine("C. Adauga cursa");
 				Console.WriteLine("D. Afisare conducatori/masini/curse");
-				Console.WriteLine("E. Cauta masina (dupa model)");
-				Console.WriteLine("F. Cauta conducator (dupa nume)");
 
 				string optiune = Console.ReadLine()?.ToUpper() ?? string.Empty;
 
@@ -37,59 +36,29 @@ namespace Main
 						break;
 
 					case "C":
-						CursaModel cursa = CursaModel.AdaugaCursa(masina, conducator);
+						cursa = CursaModel.AdaugaCursa(masina, conducator);
 						listaCursa.Add(cursa);
 						break;
 
 					case "D":
-						Console.WriteLine("0. Afisare conducatori");
-						Console.WriteLine("1. Afisare masini");
-						Console.WriteLine("2. Afisare curse");
+						Console.WriteLine("0. Afisare/Cautare/Selectare conducatori");
+						Console.WriteLine("1. Afisare/Cautare/Selectare masini");
+						Console.WriteLine("2. Afisare/Cautare/Selectare curse");
 						int.TryParse(Console.ReadLine(), out int selectie);
 						switch (selectie)
 						{
 							case 0:
-								ConducatorModel.AfisareConducatori(listaConducatori);
+								conducator = ConducatorModel.AfisareConducatori(listaConducatori);
 								break;
 							case 1:
-								MasinaModel.AfisareMasini(listaMasini);
+								masina = MasinaModel.AfisareMasini(listaMasini);
 								break;
 							case 2:
-								CursaModel.AfisareCurse(listaCursa);
+								cursa = CursaModel.AfisareCurse(listaCursa);
 								break;
 							default:
 								Console.WriteLine("Optiune inexistenta");
 								break;
-						}
-						break;
-
-					case "E":
-						Console.Write("Introdu modelul masinii cautate: ");
-						string modelCautat = Console.ReadLine() ?? string.Empty;
-						var masiniGasite = listaMasini.Where(m => m.Model.Contains(modelCautat, StringComparison.OrdinalIgnoreCase)).ToList();
-						if (masiniGasite.Count > 0)
-						{
-							Console.WriteLine("Masini gasite:");
-							MasinaModel.AfisareMasini(masiniGasite);
-						}
-						else
-						{
-							Console.WriteLine("Nu s-au gasit masini.");
-						}
-						break;
-
-					case "F":
-						Console.Write("Introdu numele conducatorului cautat: ");
-						string numeCautat = Console.ReadLine() ?? string.Empty;
-						var conducatoriGasiti = listaConducatori.Where(c => c.Nume.Contains(numeCautat, StringComparison.OrdinalIgnoreCase)).ToList();
-						if (conducatoriGasiti.Count > 0)
-						{
-							Console.WriteLine("Conducatori gasiti:");
-							ConducatorModel.AfisareConducatori(conducatoriGasiti);
-						}
-						else
-						{
-							Console.WriteLine("Nu s-au gasit conducatori.");
 						}
 						break;
 
@@ -102,4 +71,3 @@ namespace Main
 		}
 	}
 }
-
