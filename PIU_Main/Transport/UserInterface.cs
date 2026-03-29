@@ -3,6 +3,7 @@ using Masina;
 using ConducatorModel = Conducator.Conducator;
 using MasinaModel = Masina.Masina;
 using CursaModel = Cursa.Cursa;
+using AdministrareDate;
 
 namespace Main
 {
@@ -14,6 +15,9 @@ namespace Main
 		private static MasinaModel? masinaCurenta = null;
 		private static ConducatorModel? conducatorCurent = null;
 		private static CursaModel? cursaCurenta = null;
+
+		IStocareData<MasinaModel> adminMasini = StocareFactory.GetAdministratorStocare<MasinaModel>();
+		IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
 
 		public static void StartMenu()
 		{
