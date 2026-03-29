@@ -1,6 +1,6 @@
-﻿namespace AdministrareDate
+namespace Helper
 {
-	public static class AdministrareDate
+	public static class ConsoleHelpers
 	{
 		public static void AfiseazaListaDateMembre<TItem>(IReadOnlyList<TItem> items, Func<TItem, string> formatter)
 		{
@@ -15,6 +15,7 @@
 				Console.WriteLine($"{i}: {formatter(items[i])}");
 			}
 		}
+
 		public static bool TrySelectFromClassList<TItem>(IReadOnlyList<TItem> items, 
 			string itemName, 
 			out TItem? selected) where TItem : class
@@ -48,6 +49,7 @@
 			selected = items[index];
 			return true;
 		}
+
 		public static bool TryCautareFromClassListByMember<TItem>(
 			IReadOnlyList<TItem> items, 
 			string itemName, 

@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Conducator\Conducator.csproj" />
     <ProjectReference Include="..\Masina\Masina.csproj" />
+    <ProjectReference Include="..\Helper\Helper.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Conducator\Conducator.csproj" />
-    <ProjectReference Include="..\Helper\Helper.csproj" />
-  </ItemGroup>
-
 </Project>
