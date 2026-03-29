@@ -1,4 +1,5 @@
 {
-  "FormatSalvare": "memory",
-  "NumeFisier": "Date"
+  "FormatSalvare": "json",
+  "NumeFisier": "Date",
+  "DirectorSalvare": "../../../DateSalvate"
 }

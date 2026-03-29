@@ -1,7 +1,4 @@
-﻿using ConducatorModel = Conducator.Conducator;
-using MasinaModel = Masina.Masina;
-using CursaModel = Cursa.Cursa;
-using System.Text.Json.Nodes;
+﻿using System.Text.Json.Nodes;
 
 namespace AdministrareDate
 {
@@ -17,6 +14,7 @@ namespace AdministrareDate
 		{
 			string formatSalvare = "memory";
 			string numeFisier = "Date";
+			string directorSalvare = "";
 			string configPath = "config.json";
 
 			if(File.Exists(configPath))
@@ -29,6 +27,7 @@ namespace AdministrareDate
 					{
 						formatSalvare = (string)configNode["FormatSalvare"] ?? formatSalvare;
 						numeFisier = (string)configNode["NumeFisier"] ?? numeFisier;
+						directorSalvare = (string)configNode["DirectorSalvare"] ?? directorSalvare; // Read path
 					}
 				}
 				catch (Exception ex)
@@ -36,9 +35,17 @@ namespace AdministrareDate
 					Console.WriteLine($"Eroare citind config: {ex.Message}");
 				}
 			}
+			
 			if(formatSalvare != null)
 			{
 				string fileNameForType = $"{numeFisier}_{typeof(T).Name}.json";
+
+				// Seteaza directoriul de salvare
+				if (!string.IsNullOrEmpty(directorSalvare))
+				{
+					Directory.CreateDirectory(directorSalvare);
+					fileNameForType = Path.Combine(directorSalvare, fileNameForType);
+				}
 
 				switch (formatSalvare.ToLower())
 				{
