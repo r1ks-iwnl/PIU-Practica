@@ -43,7 +43,7 @@ namespace AdministrareDate
 				switch (formatSalvare.ToLower())
 				{
 					default:
-					case "memorie":
+					case "memory":
 						return new StocareMemorie<T>();
 					case "json":
 						return new StocareFisierJSON<T>(fileNameForType);

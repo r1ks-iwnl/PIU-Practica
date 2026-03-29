@@ -46,8 +46,9 @@ namespace AdministrareDate
 				var elemente = JsonSerializer.Deserialize<List<T>>(jsonString);
 				return elemente ?? new List<T>();
 			}
-			catch (JsonException)
+			catch (Exception ex)
 			{
+				Console.WriteLine($"Eroare la deserializare: {ex}");
 				return new List<T>();
 			}
 		}
