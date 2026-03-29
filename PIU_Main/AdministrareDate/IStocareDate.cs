@@ -44,11 +44,12 @@ namespace AdministrareDate
 				{
 					default:
 					case "memorie":
-
+						return new StocareMemorie<T>();
 					case "json":
 						return new StocareFisierJSON<T>(fileNameForType);
 				}
 			}
+			return new StocareMemorie<T>();
 		}
 	}
 }

@@ -9,15 +9,13 @@ namespace Main
 {
 	public static class UserInterface
 	{
-		private static List<ConducatorModel> listaConducatori = new();
-		private static List<MasinaModel> listaMasini = new();
-		private static List<CursaModel> listaCursa = new();
 		private static MasinaModel? masinaCurenta = null;
 		private static ConducatorModel? conducatorCurent = null;
 		private static CursaModel? cursaCurenta = null;
 
-		IStocareData<MasinaModel> adminMasini = StocareFactory.GetAdministratorStocare<MasinaModel>();
-		IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
+		static IStocareData<MasinaModel> adminMasini = StocareFactory.GetAdministratorStocare<MasinaModel>();
+		static IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
+		static IStocareData<CursaModel> adminCurse = StocareFactory.GetAdministratorStocare<CursaModel>();
 
 		public static void StartMenu()
 		{
@@ -37,19 +35,19 @@ namespace Main
 				{
 					case "A":
 						masinaCurenta = AdaugaMasina();
-						listaMasini.Add(masinaCurenta);
+						adminMasini.AdaugaElement(masinaCurenta);
 						break;
 
 					case "B":
 						conducatorCurent = AdaugaConducator();
-						listaConducatori.Add(conducatorCurent);
+						adminConducatori.AdaugaElement(conducatorCurent);
 						break;
 
 					case "C":
 						cursaCurenta = AdaugaCursa(masinaCurenta, conducatorCurent);
 						if (cursaCurenta != null)
 						{
-							listaCursa.Add(cursaCurenta);
+							adminCurse.AdaugaElement(cursaCurenta);
 						}
 						break;
 
@@ -86,13 +84,13 @@ namespace Main
 			switch (selectie)
 			{
 				case 0:
-					conducatorCurent = AfisareConducatori(listaConducatori) ?? conducatorCurent;
+					conducatorCurent = AfisareConducatori(adminConducatori.ObtineToateElementele()) ?? conducatorCurent;
 					break;
 				case 1:
-					masinaCurenta = AfisareMasini(listaMasini) ?? masinaCurenta;
+					masinaCurenta = AfisareMasini(adminMasini.ObtineToateElementele()) ?? masinaCurenta;
 					break;
 				case 2:
-					cursaCurenta = AfisareCurse(listaCursa) ?? cursaCurenta;
+					cursaCurenta = AfisareCurse(adminCurse.ObtineToateElementele()) ?? cursaCurenta;
 					break;
 				default:
 					Console.WriteLine("Optiune inexistenta");

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AdministrareDate\AdministrareDate.csproj" />
     <ProjectReference Include="..\Conducator\Conducator.csproj" />
     <ProjectReference Include="..\Masina\Masina.csproj" />
     <ProjectReference Include="..\Cursa\Cursa.csproj" />
