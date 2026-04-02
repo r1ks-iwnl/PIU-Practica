@@ -23,6 +23,7 @@ namespace Masina
 
 	public class Masina
 	{
+		public Guid Id { get; init; } = Guid.NewGuid();
 		public required string Model { get; init; }
 		public required int An { get; init; }
 		public CuloareMasina Culoare { get; init; }
@@ -42,6 +43,20 @@ namespace Masina
 		public void AdaugaConducator(ConducatorModel condNou)
 		{
 			_condDisp.Add(condNou);
+		}
+
+		public override bool Equals(object? obj)
+		{
+			if (obj is Masina other)
+			{
+				return this.Id == other.Id;
+			}
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode();
 		}
 	}
 }

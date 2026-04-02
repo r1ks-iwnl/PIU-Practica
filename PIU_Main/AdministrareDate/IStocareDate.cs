@@ -5,6 +5,8 @@ namespace AdministrareDate
 	public interface IStocareData<T> where T : class
 	{
 		void AdaugaElement(T element);
+
+		void EliminaElement(T element);
 		List<T> ObtineToateElementele();
 		void RescrieDate(List<T> elemente);
 	}
@@ -27,7 +29,7 @@ namespace AdministrareDate
 					{
 						formatSalvare = (string)configNode["FormatSalvare"] ?? formatSalvare;
 						numeFisier = (string)configNode["NumeFisier"] ?? numeFisier;
-						directorSalvare = (string)configNode["DirectorSalvare"] ?? directorSalvare; // Read path
+						directorSalvare = (string)configNode["DirectorSalvare"] ?? directorSalvare;
 					}
 				}
 				catch (Exception ex)

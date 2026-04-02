@@ -16,6 +16,13 @@ namespace AdministrareDate
 			RescrieDate(elementeCurente);
 		}
 
+		public void EliminaElement(T element)
+		{
+			List<T> elementeCurente = ObtineToateElementele();
+			elementeCurente.Remove(element);
+			RescrieDate(elementeCurente);
+		}
+
 		public List<T> ObtineToateElementele()
 		{
 			return manipulareJSON.ExtrageDinFisier<T>();

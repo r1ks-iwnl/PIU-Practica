@@ -6,6 +6,7 @@ namespace Cursa
 {
 	public class Cursa
 	{
+		public Guid Id { get; init; } = Guid.NewGuid();
 		public required int Distanta { get; init; }
 		public required MasinaModel Masina { get; init; }
 		public required ConducatorModel Conducator { get; init; }
@@ -18,7 +19,22 @@ namespace Cursa
 			Masina = masina;
 			Conducator = conducator;
 		}
+
+		public override bool Equals(object? obj)
+		{
+			if (obj is Cursa other)
+			{
+				return this.Id == other.Id;
+			}
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode();
+		}
 	}
 }
 
 //Afisare curse ce contin un conducator/o masina
+//Selectare conducator/masina la initializare

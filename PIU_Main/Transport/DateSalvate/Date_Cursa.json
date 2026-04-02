@@ -1,1 +1,97 @@
-[]
+[
+  {
+    "Id": "cf270df8-0ff0-49aa-ba9c-97be2871bf6c",
+    "Distanta": 27,
+    "Masina": {
+      "Id": "c383fdd9-d0a5-424f-a3eb-a8449c2772ca",
+      "Model": "Renault Clio",
+      "An": 2015,
+      "Culoare": 2,
+      "Optiuni": 0,
+      "DistParcursa": 0
+    },
+    "Conducator": {
+      "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
+      "Nume": "Cristian Matei",
+      "DataNastere": "29-07-1989",
+      "DataAngajare": "05-05-2015",
+      "DistCondusa": 0
+    }
+  },
+  {
+    "Id": "7f286b6d-094d-4392-9fac-0ea157f62583",
+    "Distanta": 45,
+    "Masina": {
+      "Id": "ce271e17-bdc8-45af-8a42-8a69b3e1163b",
+      "Model": "Dacia Logan",
+      "An": 2022,
+      "Culoare": 2,
+      "Optiuni": 9,
+      "DistParcursa": 0
+    },
+    "Conducator": {
+      "Id": "5dd9cb25-f132-44e4-b577-b651f4214b84",
+      "Nume": "Ion Popescu",
+      "DataNastere": "15-05-1985",
+      "DataAngajare": "01-02-2010",
+      "DistCondusa": 0
+    }
+  },
+  {
+    "Id": "ee8d231a-d021-44c1-8ebd-74dc1805b0ca",
+    "Distanta": 75,
+    "Masina": {
+      "Id": "37892af5-b96b-4322-8c3a-3d3ec0723e24",
+      "Model": "Tesla Model 3",
+      "An": 2023,
+      "Culoare": 3,
+      "Optiuni": 22,
+      "DistParcursa": 0
+    },
+    "Conducator": {
+      "Id": "5dd9cb25-f132-44e4-b577-b651f4214b84",
+      "Nume": "Ion Popescu",
+      "DataNastere": "15-05-1985",
+      "DataAngajare": "01-02-2010",
+      "DistCondusa": 0
+    }
+  },
+  {
+    "Id": "b5392cde-402c-409a-855d-6165ca42919e",
+    "Distanta": 50,
+    "Masina": {
+      "Id": "ce271e17-bdc8-45af-8a42-8a69b3e1163b",
+      "Model": "Dacia Logan",
+      "An": 2022,
+      "Culoare": 2,
+      "Optiuni": 9,
+      "DistParcursa": 0
+    },
+    "Conducator": {
+      "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
+      "Nume": "Cristian Matei",
+      "DataNastere": "29-07-1989",
+      "DataAngajare": "05-05-2015",
+      "DistCondusa": 0
+    }
+  },
+  {
+    "Id": "25afbf50-1de3-423f-b771-60ba90e6feb8",
+    "Distanta": 44,
+    "Masina": {
+      "Id": "a6b33e38-ec00-4b45-b4bd-60902fce55b4",
+      "Model": "BMW X5",
+      "An": 2021,
+      "Culoare": 3,
+      "Optiuni": 27,
+      "DistParcursa": 0
+    },
+    "Conducator": {
+      "Id": "01f4d4d2-5778-47e7-a5bc-64149c09b655",
+      "Nume": "Elena Dumitru",
+      "DataNastere": "22-11-1992",
+      "DataAngajare": "15-06-2018",
+      "DistCondusa": 0
+    }
+  }
+]

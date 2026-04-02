@@ -22,10 +22,8 @@ namespace Main
 			do
 			{
 				Console.WriteLine("\n--- MENIU PRINCIPAL ---");
-				Console.WriteLine("A. Adauga masina");
-				Console.WriteLine("B. Adauga conducator");
-				Console.WriteLine("C. Adauga cursa");
-				Console.WriteLine("D. Afisare conducatori/masini/curse");
+				Console.WriteLine("A. Modificare conducatori/masini/curse");
+				Console.WriteLine("B. Afisare conducatori/masini/curse");
 				Console.WriteLine("X. Iesire");
 				Console.Write("Alege o optiune: ");
 
@@ -34,24 +32,10 @@ namespace Main
 				switch (optiune)
 				{
 					case "A":
-						masinaCurenta = AdaugaMasina();
-						adminMasini.AdaugaElement(masinaCurenta);
+						MeniuModificare();
 						break;
 
 					case "B":
-						conducatorCurent = AdaugaConducator();
-						adminConducatori.AdaugaElement(conducatorCurent);
-						break;
-
-					case "C":
-						cursaCurenta = AdaugaCursa(masinaCurenta, conducatorCurent);
-						if (cursaCurenta != null)
-						{
-							adminCurse.AdaugaElement(cursaCurenta);
-						}
-						break;
-
-					case "D":
 						MeniuAfisare();
 						break;
 
@@ -67,6 +51,115 @@ namespace Main
 			while (true);
 		}
 
+		private static void MeniuModificare()
+		{
+			Console.WriteLine("\n--- MENIU MODIFICARE ---");
+			Console.WriteLine("0. Adaugare");
+			Console.WriteLine("1. Eliminare");
+			Console.Write("Alege o optiune: ");
+
+			if (!int.TryParse(Console.ReadLine(), out int selectie))
+			{
+				Console.WriteLine("Optiune invalida.");
+				return;
+			}
+			bool adaugare;
+			switch (selectie)
+			{
+				case 0:
+					adaugare = true;
+					break;
+				case 1:
+					adaugare = false;
+					break;
+				default:
+					Console.WriteLine("Optiune inexistenta");
+					return;
+			}
+
+			selectie = -1;
+
+			Console.WriteLine("\n--- MENIU MODIFICARE ---");
+			Console.WriteLine("0. Adaugare/Eliminare conducatori");
+			Console.WriteLine("1. Adaugare/Eliminare masini");
+			Console.WriteLine("2. Adaugare/Eliminare curse");
+			Console.Write("Alege o optiune: ");
+
+			if (!int.TryParse(Console.ReadLine(), out selectie))
+			{
+				Console.WriteLine("Optiune invalida.");
+				return;
+			}
+
+			switch (selectie)
+			{
+				case 0:
+					if (adaugare)
+					{
+						conducatorCurent = AdaugaConducator();
+						adminConducatori.AdaugaElement(conducatorCurent);
+						break;
+					}
+					else
+					{
+						conducatorCurent = AfisareConducatori(adminConducatori.ObtineToateElementele());
+						if(conducatorCurent == null)
+						{
+							Console.WriteLine("Selectie invalida");
+							break;
+						}
+						adminConducatori.EliminaElement(conducatorCurent);
+						conducatorCurent = null;
+						break;
+					}
+
+				case 1:
+					if (adaugare)
+					{
+						masinaCurenta = AdaugaMasina();
+						adminMasini.AdaugaElement(masinaCurenta);
+						break;
+					}
+					else
+					{
+						masinaCurenta = AfisareMasini(adminMasini.ObtineToateElementele());
+						if (masinaCurenta == null)
+						{
+							Console.WriteLine("Selectie invalida");
+							break;
+						}
+						adminMasini.EliminaElement(masinaCurenta);
+						masinaCurenta = null;
+						break;
+					}
+				case 2:
+					if (adaugare)
+					{
+						cursaCurenta = AdaugaCursa(masinaCurenta, conducatorCurent);
+						if (cursaCurenta != null)
+						{
+							adminCurse.AdaugaElement(cursaCurenta);
+						}
+						break;
+					}
+					else
+					{
+						cursaCurenta = AfisareCurse(adminCurse.ObtineToateElementele());
+						if (cursaCurenta == null)
+						{
+							Console.WriteLine("Selectie invalida");
+							break;
+						}
+						adminCurse.EliminaElement(cursaCurenta);
+						cursaCurenta = null;
+						break;
+					}
+
+				default:
+					Console.WriteLine("Optiune inexistenta");
+					break;
+			}
+		}
 		private static void MeniuAfisare()
 		{
 			Console.WriteLine("\n--- MENIU AFISARE ---");
@@ -229,7 +322,7 @@ namespace Main
 			int i = 0;
 			foreach (CursaModel cursa in curse)
 			{
-				Console.WriteLine(i + ": " + cursa.Distanta + " " + cursa.Conducator.Nume + " " + cursa.Masina.Model);
+				Console.WriteLine($"{i}: {cursa.Distanta}km - {cursa.Conducator.Nume} - {cursa.Masina.Model}");
 				i++;
 			}
 			return SelectareCursa(curse);

@@ -4,6 +4,7 @@ namespace Conducator
 {
 	public class Conducator
 	{
+		public Guid Id { get; init; } = Guid.NewGuid();
 		public required string Nume { get; init; }
 		public required string DataNastere { get; init; }
 		public required string DataAngajare { get; init; }
@@ -21,6 +22,20 @@ namespace Conducator
 		public void MasinaNoua(string modelMasina)
 		{
 			_masiniConduse.Add(modelMasina);
+		}
+
+		public override bool Equals(object? obj)
+		{
+			if (obj is Conducator other)
+			{
+				return this.Id == other.Id;
+			}
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode();
 		}
 	}
 }

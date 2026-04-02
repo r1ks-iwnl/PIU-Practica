@@ -24,11 +24,11 @@ namespace Helper
 
 			if (items.Count == 0)
 			{
-				Console.WriteLine($"Nu exista {itemName} disponibili.");
+				Console.WriteLine($"Nu exista {itemName} disponibil.");
 				return false;
 			}
 
-			Console.WriteLine($"Selecteaza un {itemName} dupa numar (Enter pentru a anula): ");
+			Console.WriteLine($"Selecteaza {itemName} dupa numar (Enter pentru a anula): ");
 			string input = Console.ReadLine() ?? string.Empty;
 
 			if (string.IsNullOrWhiteSpace(input))

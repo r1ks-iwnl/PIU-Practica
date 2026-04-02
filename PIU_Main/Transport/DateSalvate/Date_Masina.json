@@ -1,9 +1,42 @@
 [
   {
-    "Model": "qwe",
-    "An": 123213,
+    "Id": "ce271e17-bdc8-45af-8a42-8a69b3e1163b",
+    "Model": "Dacia Logan",
+    "An": 2022,
+    "Culoare": 2,
+    "Optiuni": 9,
+    "DistParcursa": 0
+  },
+  {
+    "Id": "37892af5-b96b-4322-8c3a-3d3ec0723e24",
+    "Model": "Tesla Model 3",
+    "An": 2023,
     "Culoare": 3,
-    "Optiuni": 7,
+    "Optiuni": 22,
+    "DistParcursa": 0
+  },
+  {
+    "Id": "694f35f9-5db4-4e95-8456-c8e5faffab8b",
+    "Model": "VW Golf",
+    "An": 2018,
+    "Culoare": 1,
+    "Optiuni": 5,
+    "DistParcursa": 0
+  },
+  {
+    "Id": "a6b33e38-ec00-4b45-b4bd-60902fce55b4",
+    "Model": "BMW X5",
+    "An": 2021,
+    "Culoare": 3,
+    "Optiuni": 27,
+    "DistParcursa": 0
+  },
+  {
+    "Id": "c383fdd9-d0a5-424f-a3eb-a8449c2772ca",
+    "Model": "Renault Clio",
+    "An": 2015,
+    "Culoare": 2,
+    "Optiuni": 0,
     "DistParcursa": 0
   }
 ]

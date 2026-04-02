@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "Id": "5dd9cb25-f132-44e4-b577-b651f4214b84",
+    "Nume": "Ion Popescu",
+    "DataNastere": "15-05-1985",
+    "DataAngajare": "01-02-2010",
+    "DistCondusa": 0
+  },
+  {
+    "Id": "01f4d4d2-5778-47e7-a5bc-64149c09b655",
+    "Nume": "Elena Dumitru",
+    "DataNastere": "22-11-1992",
+    "DataAngajare": "15-06-2018",
+    "DistCondusa": 0
+  },
+  {
+    "Id": "74dddd52-0d78-4bb5-a856-514d0127dfdf",
+    "Nume": "Andrei Ionescu",
+    "DataNastere": "03-01-1978",
+    "DataAngajare": "15-06-2018",
+    "DistCondusa": 0
+  },
+  {
+    "Id": "9712ab04-6cf2-49a6-813b-6b2d0bf5d722",
+    "Nume": "Maria Vasilescu",
+    "DataNastere": "12-08-1995",
+    "DataAngajare": "10-10-2021",
+    "DistCondusa": 0
+  },
+  {
+    "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
+    "Nume": "Cristian Matei",
+    "DataNastere": "29-07-1989",
+    "DataAngajare": "05-05-2015",
+    "DistCondusa": 0
+  }
+]
