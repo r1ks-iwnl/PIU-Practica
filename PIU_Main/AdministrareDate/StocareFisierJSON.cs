@@ -23,6 +23,17 @@ namespace AdministrareDate
 			RescrieDate(elementeCurente);
 		}
 
+		public void ActualizeazaElement(T elementModificat) //Prin crearea unui obiect nou dar cu IDul obiectului vechi
+		{
+			List<T> elementeCurente = ObtineToateElementele();
+			int index = elementeCurente.IndexOf(elementModificat);
+			if (index != -1)
+			{
+				elementeCurente[index] = elementModificat;
+				RescrieDate(elementeCurente);
+			}
+		}
+
 		public List<T> ObtineToateElementele()
 		{
 			return manipulareJSON.ExtrageDinFisier<T>();

@@ -6,6 +6,7 @@ namespace AdministrareDate
 	{
 		void AdaugaElement(T element);
 		void EliminaElement(T element);
+		void ActualizeazaElement(T elementModificat);
 		List<T> ObtineToateElementele();
 		void RescrieDate(List<T> elemente);
 	}
