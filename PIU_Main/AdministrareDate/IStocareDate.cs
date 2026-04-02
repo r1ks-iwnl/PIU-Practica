@@ -5,7 +5,6 @@ namespace AdministrareDate
 	public interface IStocareData<T> where T : class
 	{
 		void AdaugaElement(T element);
-
 		void EliminaElement(T element);
 		List<T> ObtineToateElementele();
 		void RescrieDate(List<T> elemente);

@@ -16,7 +16,7 @@ namespace AdministrareDate
 			RescrieDate(elementeCurente);
 		}
 
-		public void EliminaElement(T element)
+		public void EliminaElement(T element) //Clasele au override la Equal() pentru a facilita Remove()
 		{
 			List<T> elementeCurente = ObtineToateElementele();
 			elementeCurente.Remove(element);

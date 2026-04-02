@@ -72,14 +72,12 @@ namespace Helper
 				return false;
 			}
 
-			selectedItems = items
-				.Where(item => 
+			selectedItems = items.Where(item => 
 				{
 					string propertyValue = propertySelector(item);
 					return propertyValue != null && 
 						   propertyValue.Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
-				})
-				.ToList();
+				}).ToList();
 
 			if (selectedItems.Count == 0)
 			{

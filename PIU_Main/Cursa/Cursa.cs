@@ -1,16 +1,24 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Masina;
+using System.Diagnostics.CodeAnalysis;
 using ConducatorModel = Conducator.Conducator;
 using MasinaModel = Masina.Masina;
 
 namespace Cursa
 {
+	public enum StareCursa
+	{
+		Planificata,
+		InDesfasurare,
+		Finalizata,
+		Anulata
+	}
 	public class Cursa
 	{
 		public Guid Id { get; init; } = Guid.NewGuid();
 		public required int Distanta { get; init; }
 		public required MasinaModel Masina { get; init; }
 		public required ConducatorModel Conducator { get; init; }
-		private bool _finalizare; //Bazat pe compararea timpului sistemului salvat in txt
+		public StareCursa Stare { get; }
 
 		[SetsRequiredMembers]
 		public Cursa(int distanta, MasinaModel masina, ConducatorModel conducator)
@@ -18,6 +26,7 @@ namespace Cursa
 			Distanta = distanta;
 			Masina = masina;
 			Conducator = conducator;
+			Stare = StareCursa.Planificata;
 		}
 
 		public override bool Equals(object? obj)

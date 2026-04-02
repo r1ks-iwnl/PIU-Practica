@@ -322,7 +322,7 @@ namespace Main
 			int i = 0;
 			foreach (CursaModel cursa in curse)
 			{
-				Console.WriteLine($"{i}: {cursa.Distanta}km - {cursa.Conducator.Nume} - {cursa.Masina.Model}");
+				Console.WriteLine($"{i}: {cursa.Distanta}km - {cursa.Conducator.Nume} - {cursa.Masina.Model} - {cursa.Stare}");
 				i++;
 			}
 			return SelectareCursa(curse);
