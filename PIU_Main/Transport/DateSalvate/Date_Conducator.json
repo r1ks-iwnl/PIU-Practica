@@ -1,12 +1,5 @@
 [
   {
-    "Id": "5dd9cb25-f132-44e4-b577-b651f4214b84",
-    "Nume": "Ion Popescu",
-    "DataNastere": "15-05-1985",
-    "DataAngajare": "01-02-2010",
-    "DistCondusa": 0
-  },
-  {
     "Id": "01f4d4d2-5778-47e7-a5bc-64149c09b655",
     "Nume": "Elena Dumitru",
     "DataNastere": "22-11-1992",
