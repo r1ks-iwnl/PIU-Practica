@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="WPF_Main.MasiniView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<StackPanel Grid.Column="0" Margin="10">
+			<TextBlock Text="Model:" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,2"/>
+			<TextBox x:Name="Nume" Width="200"/>
+			<TextBlock Text="An:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
+			<ComboBox x:Name="cmbAn"  Width="200"/>
+			<TextBlock Text="Culoare:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
+			<StackPanel Orientation="Horizontal" Width="200">
+				<RadioButton x:Name="rbRosu" GroupName="rbCuloare" Content="Roșu" Foreground="White" Margin="0,0,10,0"/>
+				<RadioButton x:Name="rbAlb" GroupName="rbCuloare" Content="Alb" Foreground="White" Margin="0,0,10,0"/>
+				<RadioButton x:Name="rbNegru" GroupName="rbCuloare" Content="Negru" Foreground="White" Margin="0,0,10,0"/>
+			</StackPanel>
+			<TextBlock Text="Opțiuni:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
+			<WrapPanel Orientation="Horizontal" Width="234" Margin="25,0,0,0">
+				<CheckBox x:Name="cbAerCond" Content="Aer Conditionat" Foreground="White" Margin="0,0,10,0"/>
+				<CheckBox x:Name="cbNavigatie" Content="Navigatie" Foreground="White" Margin="0,0,10,0"/>
+				<CheckBox x:Name="cbCutieAutom" Content="Cutie Automata" Foreground="White" Margin="0,0,10,0"/>
+				<CheckBox x:Name="cbSenzoriParc" Content="Senzori Parcare" Foreground="White" Margin="0,0,10,0"/>
+				<CheckBox x:Name="cbCameraMarș" Content="Camera Marșarier" Foreground="White" Margin="0,0,10,0"/>
+			</WrapPanel>
+
+			<Button x:Name="Adauga" Content="Adaugă Mașină" Width="200" Margin="0,20,0,0" Click="Adauga_Click"/>
+			<TextBlock x:Name="MesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" Width="200" TextAlignment="Center"/>
+		</StackPanel>
+
+		<DataGrid Grid.Column="1" x:Name="MasiniDataGrid" Margin="10" 
+				  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+				<DataGridTextColumn Header="An" Binding="{Binding An}" />
+				<DataGridTextColumn Header="Culoare" Binding="{Binding Culoare}" />
+				<DataGridTextColumn Header="Opțiuni" Binding="{Binding Optiuni}" />
+				<DataGridTextColumn Header="Distanță Parcursă" Binding="{Binding DistParcursa}" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

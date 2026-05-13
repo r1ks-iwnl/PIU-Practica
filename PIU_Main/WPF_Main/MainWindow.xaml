@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Main"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Transport" Height="450" Width="800" Background="#393473">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <!-- Left column for the menu -->
+            <ColumnDefinition Width="Auto"/>
+            <!-- Right column for the changing views -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <StackPanel Grid.Column="0" Width="200" Margin="0, 100, 0, 100">
+            <Button x:Name="btnConducator"
+				Style="{StaticResource MDN}"
+				Content="Conducatori"
+				Margin="0, 0, 0, 20"
+                Click="btnConducator_Click"/>
+            <Button x:Name="btnMasina"
+					Style="{StaticResource MDN}"
+					Content="Masini"
+					Margin="0, 0, 0, 20"
+                    Click="btnMasina_Click"/>
+            <Button x:Name="btnCursa"
+					Style="{StaticResource MDN}"
+					Content="Curse"
+					Margin="0, 0, 0, 20"
+                    Click="btnCursa_Click"/>
+        </StackPanel>
+
+        <!-- The area where your views will be injected -->
+        <ContentControl x:Name="MainContent" Grid.Column="1" Margin="20" />
     </Grid>
 </Window>

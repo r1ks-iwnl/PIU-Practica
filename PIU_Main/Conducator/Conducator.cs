@@ -24,6 +24,13 @@ namespace Conducator
 			_masiniConduse.Add(modelMasina);
 		}
 
+		public string MasiniConduseDisplay()
+		{
+			if (_masiniConduse == null || !_masiniConduse.Any())
+				return "Niciuna";
+			return string.Join(", ", _masiniConduse);
+		}
+
 		public override bool Equals(object? obj)
 		{
 			if (obj is Conducator other)

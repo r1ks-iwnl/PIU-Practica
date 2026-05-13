@@ -20,5 +20,21 @@ namespace WPF_Main
 		{
 			InitializeComponent();
 		}
+
+		private void btnConducator_Click(object sender, RoutedEventArgs e)
+		{
+            // Set the content area to your new view
+			MainContent.Content = new ConducatoriView();
+		}
+
+		private void btnMasina_Click(object sender, RoutedEventArgs e)
+		{
+			MainContent.Content = new MasiniView();
+		}
+
+		private void btnCursa_Click(object sender, RoutedEventArgs e)
+		{
+			MainContent.Content = new CurseView();
+		}
 	}
 }
