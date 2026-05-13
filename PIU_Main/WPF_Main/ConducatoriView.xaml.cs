@@ -106,6 +106,7 @@ namespace WPF_Main
 		private static IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
 
 		private ObservableCollection<ConducatorModel> conducatoriList;
+		private ConducatorModel? conducatorSelectat;
 		public ConducatorFormDraft Draft { get; set; } = new ConducatorFormDraft();
 
 		public ConducatoriView()
@@ -117,11 +118,11 @@ namespace WPF_Main
 
 		private void IncarcaDate()
 		{
-			// Load existing data from JSON / Memory using the factory
+			// Incarca datele prin Factory
 			var dateExistente = adminConducatori.ObtineToateElementele();
 			conducatoriList = new ObservableCollection<ConducatorModel>(dateExistente ?? new List<ConducatorModel>());
 
-			// Bind the list to the DataGrid
+			// Ataseaza lista la datagrid
 			ConducatoriDataGrid.ItemsSource = conducatoriList;
 
 			CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ConducatoriDataGrid.ItemsSource);
@@ -174,6 +175,83 @@ namespace WPF_Main
 			{
 				AfiseazaMesaj($"Eroare la adăugarea conducătorului: {ex.Message}", true);
 			}
+		}
+
+		private void btnModifica_Click(object sender, RoutedEventArgs e)
+		{
+			tbMesajStatus.Visibility = Visibility.Collapsed;
+
+			if (conducatorSelectat == null)
+			{
+				AfiseazaMesaj("Selectați un conducător din listă pentru modificare.", true);
+				return;
+			}
+
+			if (!Draft.IsValid)
+			{
+				AfiseazaMesaj("Vă rugăm să corectați erorile de pe formular.", true);
+				return;
+			}
+
+			try
+			{
+				string numeComplet = $"{Draft.NumeText.Trim()} {Draft.PrenumeText.Trim()}";
+				string dataNastere = Draft.DataNastere?.ToString("d") ?? string.Empty;
+				string dataAngajare = Draft.DataAngajare?.ToString("d") ?? string.Empty;
+
+				ConducatorModel conducatorModificat = conducatorSelectat.CreeazaCopieModificata(numeComplet, dataNastere, dataAngajare);
+				adminConducatori.ActualizeazaElement(conducatorModificat);
+				IncarcaDate();
+				conducatorSelectat = conducatorModificat;
+				ConducatoriDataGrid.SelectedItem = conducatoriList.FirstOrDefault(c => c.Id == conducatorModificat.Id);
+
+				AfiseazaMesaj("Conducătorul a fost modificat cu succes!", false);
+			}
+			catch (Exception ex)
+			{
+				AfiseazaMesaj($"Eroare la modificarea conducătorului: {ex.Message}", true);
+			}
+		}
+
+		private void ConducatoriDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			conducatorSelectat = ConducatoriDataGrid.SelectedItem as ConducatorModel;
+			if (conducatorSelectat == null)
+			{
+				return;
+			}
+
+			(string nume, string prenume) = DesparteNume(conducatorSelectat.Nume);
+			Draft.NumeText = nume;
+			Draft.PrenumeText = prenume;
+			Draft.DataNastere = ParseDate(conducatorSelectat.DataNastere);
+			Draft.DataAngajare = ParseDate(conducatorSelectat.DataAngajare);
+		}
+
+		private static (string Nume, string Prenume) DesparteNume(string numeComplet)
+		{
+			if (string.IsNullOrWhiteSpace(numeComplet))
+			{
+				return (string.Empty, string.Empty);
+			}
+
+			string[] parti = numeComplet.Trim().Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+			if (parti.Length == 1)
+			{
+				return (parti[0], string.Empty);
+			}
+
+			return (parti[0], parti[1]);
+		}
+
+		private static DateTime? ParseDate(string? value)
+		{
+			if (DateTime.TryParse(value, out DateTime parsedDate))
+			{
+				return parsedDate;
+			}
+
+			return null;
 		}
 
 		private void AfiseazaMesaj(string mesaj, bool esteEroare)

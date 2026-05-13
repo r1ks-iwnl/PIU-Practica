@@ -31,6 +31,7 @@
 				</WrapPanel>
 
 				<Button x:Name="Adauga" Content="Adaugă Mașină" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,20,0,0" Click="Adauga_Click"/>
+				<Button x:Name="Modifica" Content="Modifică Mașină" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="Modifica_Click"/>
 				<TextBlock x:Name="MesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" TextAlignment="Center"/>
 			</StackPanel>
 		</ScrollViewer>
@@ -46,8 +47,8 @@
 				<TextBox x:Name="tbCautareModel" Width="200" TextChanged="tbCautareModel_TextChanged"/>
 			</StackPanel>
 
-			<DataGrid Grid.Row="1" x:Name="MasiniDataGrid" 
-					  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False">
+				<DataGrid Grid.Row="1" x:Name="MasiniDataGrid" 
+					  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" SelectionChanged="MasiniDataGrid_SelectionChanged">
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Model" Binding="{Binding Model}" />
 					<DataGridTextColumn Header="An" Binding="{Binding An}" />

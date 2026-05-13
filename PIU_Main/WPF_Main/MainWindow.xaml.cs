@@ -23,7 +23,7 @@ namespace WPF_Main
 
 		private void btnConducator_Click(object sender, RoutedEventArgs e)
 		{
-            // Set the content area to your new view
+            // Seteaza aria de continut la noul View
 			MainContent.Content = new ConducatoriView();
 		}
 

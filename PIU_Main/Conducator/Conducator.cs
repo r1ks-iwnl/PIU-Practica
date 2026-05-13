@@ -24,6 +24,16 @@ namespace Conducator
 			_masiniConduse.Add(modelMasina);
 		}
 
+		public Conducator CreeazaCopieModificata(string nume, string dataNastere, string dataAngajare)
+		{
+			Conducator conducatorModificat = new Conducator(nume, dataNastere, dataAngajare)
+			{
+				Id = Id
+			};
+			conducatorModificat._masiniConduse.AddRange(_masiniConduse);
+			return conducatorModificat;
+		}
+
 		public string MasiniConduseDisplay()
 		{
 			if (_masiniConduse == null || !_masiniConduse.Any())

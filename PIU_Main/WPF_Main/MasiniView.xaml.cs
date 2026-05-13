@@ -58,6 +58,7 @@ namespace WPF_Main
 	{
 		private static IStocareData<MasinaModel> adminMasini = StocareFactory.GetAdministratorStocare<MasinaModel>();
 		private ObservableCollection<MasinaModel> masiniList;
+		private MasinaModel? masinaSelectata;
 
 		public MasinaFormDraft Draft { get; set; } = new MasinaFormDraft();
 
@@ -82,7 +83,7 @@ namespace WPF_Main
 			masiniList = new ObservableCollection<MasinaModel>(dateExistente ?? new List<MasinaModel>());
 			MasiniDataGrid.ItemsSource = masiniList;
 
-			// Set up CollectionView filtering
+			// Seteaza filtrarea a CollectionView
 			CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(MasiniDataGrid.ItemsSource);
 			view.Filter = MasinaFiltru;
 		}
@@ -104,7 +105,7 @@ namespace WPF_Main
 		{
 			MesajStatus.Visibility = Visibility.Collapsed;
 
-			// Validation is now driven by the Draft object and Data Bindings
+			// Validarea e bazata pe obiectul Draft si DataBindings
 			if (!Draft.IsValid)
 			{
 				AfiseazaMesaj("Vă rugăm să introduceți corect datele modelului.", true);
@@ -114,7 +115,7 @@ namespace WPF_Main
 			string model = Draft.ModelText.Trim();
 			int an = (int)(cmbAn.SelectedItem ?? DateTime.Now.Year);
 
-			CuloareMasina culoare = CuloareMasina.Alb; // Default fallback
+			CuloareMasina culoare = CuloareMasina.Alb; // default
 			if (rbRosu?.IsChecked == true) culoare = CuloareMasina.Rosu;
 			else if (rbAlb?.IsChecked == true) culoare = CuloareMasina.Alb;
 			else if (rbNegru?.IsChecked == true) culoare = CuloareMasina.Negru;
@@ -141,6 +142,93 @@ namespace WPF_Main
 			{
 				AfiseazaMesaj($"Eroare: {ex.Message}", true);
 			}
+		}
+
+		private void Modifica_Click(object sender, RoutedEventArgs e)
+		{
+			MesajStatus.Visibility = Visibility.Collapsed;
+
+			if (masinaSelectata == null)
+			{
+				AfiseazaMesaj("Selectați o mașină din listă pentru modificare.", true);
+				return;
+			}
+
+			if (!Draft.IsValid)
+			{
+				AfiseazaMesaj("Vă rugăm să introduceți corect datele modelului.", true);
+				return;
+			}
+
+			try
+			{
+				string model = Draft.ModelText.Trim();
+				int an = (int)(cmbAn.SelectedItem ?? DateTime.Now.Year);
+
+				CuloareMasina culoare = CitesteCuloareSelectata();
+				OptiuniMasina optiuni = CitesteOptiuniSelectate();
+
+				MasinaModel masinaModificata = masinaSelectata.CreeazaCopieModificata(model, an, culoare, optiuni);
+				adminMasini.ActualizeazaElement(masinaModificata);
+				IncarcaDate();
+				masinaSelectata = masinaModificata;
+				MasiniDataGrid.SelectedItem = masiniList.FirstOrDefault(m => m.Id == masinaModificata.Id);
+
+				AfiseazaMesaj("Mașina a fost modificată cu succes!", false);
+			}
+			catch (Exception ex)
+			{
+				AfiseazaMesaj($"Eroare la modificarea mașinii: {ex.Message}", true);
+			}
+		}
+
+		private void MasiniDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			masinaSelectata = MasiniDataGrid.SelectedItem as MasinaModel;
+			if (masinaSelectata == null)
+			{
+				return;
+			}
+
+			Draft.ModelText = masinaSelectata.Model;
+			cmbAn.SelectedItem = masinaSelectata.An;
+			SeteazaCuloare(masinaSelectata.Culoare);
+			SeteazaOptiuni(masinaSelectata.Optiuni);
+		}
+
+		private void SeteazaCuloare(CuloareMasina culoare)
+		{
+			rbRosu.IsChecked = culoare == CuloareMasina.Rosu;
+			rbAlb.IsChecked = culoare == CuloareMasina.Alb;
+			rbNegru.IsChecked = culoare == CuloareMasina.Negru;
+		}
+
+		private CuloareMasina CitesteCuloareSelectata()
+		{
+			if (rbRosu?.IsChecked == true) return CuloareMasina.Rosu;
+			if (rbAlb?.IsChecked == true) return CuloareMasina.Alb;
+			if (rbNegru?.IsChecked == true) return CuloareMasina.Negru;
+			return CuloareMasina.Alb;
+		}
+
+		private void SeteazaOptiuni(OptiuniMasina optiuni)
+		{
+			cbAerCond.IsChecked = optiuni.HasFlag(OptiuniMasina.AerConditionat);
+			cbNavigatie.IsChecked = optiuni.HasFlag(OptiuniMasina.Navigatie);
+			cbCutieAutom.IsChecked = optiuni.HasFlag(OptiuniMasina.CutieAutomata);
+			cbSenzoriParc.IsChecked = optiuni.HasFlag(OptiuniMasina.SenzoriParcare);
+			cbCameraMarș.IsChecked = optiuni.HasFlag(OptiuniMasina.CameraMarsarier);
+		}
+
+		private OptiuniMasina CitesteOptiuniSelectate()
+		{
+			OptiuniMasina optiuni = OptiuniMasina.Niciuna;
+			if (cbAerCond?.IsChecked == true) optiuni |= OptiuniMasina.AerConditionat;
+			if (cbNavigatie?.IsChecked == true) optiuni |= OptiuniMasina.Navigatie;
+			if (cbCutieAutom?.IsChecked == true) optiuni |= OptiuniMasina.CutieAutomata;
+			if (cbSenzoriParc?.IsChecked == true) optiuni |= OptiuniMasina.SenzoriParcare;
+			if (cbCameraMarș?.IsChecked == true) optiuni |= OptiuniMasina.CameraMarsarier;
+			return optiuni;
 		}
 
 		private void AfiseazaMesaj(string mesaj, bool esteEroare)

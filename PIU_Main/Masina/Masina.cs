@@ -45,6 +45,16 @@ namespace Masina
 			_condDisp.Add(condNou);
 		}
 
+		public Masina CreeazaCopieModificata(string model, int an, CuloareMasina culoare, OptiuniMasina optiuni)
+		{
+			Masina masinaModificata = new Masina(model, an, culoare, optiuni)
+			{
+				Id = Id
+			};
+			masinaModificata._condDisp.AddRange(_condDisp);
+			return masinaModificata;
+		}
+
 		public override bool Equals(object? obj)
 		{
 			if (obj is Masina other)

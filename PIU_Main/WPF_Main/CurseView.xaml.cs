@@ -86,6 +86,7 @@ namespace WPF_Main
 		private static IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
 
 		private ObservableCollection<CursaModel> curseList;
+		private CursaModel? cursaSelectata;
 		public CursaFormDraft Draft { get; set; } = new CursaFormDraft();
 
 		public CurseView()
@@ -154,6 +155,52 @@ namespace WPF_Main
 			{
 				AfiseazaMesaj($"Eroare: {ex.Message}", true);
 			}
+		}
+
+		private void Modifica_Click(object sender, RoutedEventArgs e)
+		{
+			MesajStatus.Visibility = Visibility.Collapsed;
+
+			if (cursaSelectata == null)
+			{
+				AfiseazaMesaj("Selectați o cursă din listă pentru modificare.", true);
+				return;
+			}
+
+			if (!Draft.IsValid)
+			{
+				AfiseazaMesaj("Vă rugăm să selectați entitățile și o distanță validă.", true);
+				return;
+			}
+
+			try
+			{
+				int dist = int.Parse(Draft.DistantaText);
+				CursaModel cursaModificata = cursaSelectata.CreeazaCopieModificata(dist, Draft.MasinaSelectata, Draft.ConducatorSelectat);
+				adminCurse.ActualizeazaElement(cursaModificata);
+				IncarcaDate();
+				cursaSelectata = cursaModificata;
+				CurseDataGrid.SelectedItem = curseList.FirstOrDefault(c => c.Id == cursaModificata.Id);
+
+				AfiseazaMesaj("Cursa a fost modificată cu succes!", false);
+			}
+			catch (Exception ex)
+			{
+				AfiseazaMesaj($"Eroare la modificarea cursei: {ex.Message}", true);
+			}
+		}
+
+		private void CurseDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			cursaSelectata = CurseDataGrid.SelectedItem as CursaModel;
+			if (cursaSelectata == null)
+			{
+				return;
+			}
+
+			Draft.DistantaText = cursaSelectata.Distanta.ToString();
+			Draft.MasinaSelectata = cursaSelectata.Masina;
+			Draft.ConducatorSelectat = cursaSelectata.Conducator;
 		}
 
 		private void AfiseazaMesaj(string mesaj, bool esteEroare)

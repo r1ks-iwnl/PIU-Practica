@@ -29,6 +29,21 @@ namespace Cursa
 			Stare = StareCursa.Planificata;
 		}
 
+		[SetsRequiredMembers]
+		private Cursa(Cursa sursa, int distanta, MasinaModel masina, ConducatorModel conducator)
+		{
+			Id = sursa.Id;
+			Distanta = distanta;
+			Masina = masina;
+			Conducator = conducator;
+			Stare = sursa.Stare;
+		}
+
+		public Cursa CreeazaCopieModificata(int distanta, MasinaModel masina, ConducatorModel conducator)
+		{
+			return new Cursa(this, distanta, masina, conducator);
+		}
+
 		public override bool Equals(object? obj)
 		{
 			if (obj is Cursa other)
