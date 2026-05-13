@@ -123,6 +123,23 @@ namespace WPF_Main
 
 			// Bind the list to the DataGrid
 			ConducatoriDataGrid.ItemsSource = conducatoriList;
+
+			CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ConducatoriDataGrid.ItemsSource);
+			view.Filter = ConducatorFiltru;
+		}
+
+		private void tbCautareNume_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			CollectionViewSource.GetDefaultView(ConducatoriDataGrid.ItemsSource).Refresh();
+		}
+
+		private bool ConducatorFiltru(object item)
+		{
+			if (string.IsNullOrEmpty(tbCautareNume.Text))
+				return true;
+
+			var cond = (ConducatorModel)item;
+			return cond.Nume != null && cond.Nume.Contains(tbCautareNume.Text, StringComparison.OrdinalIgnoreCase);
 		}
 
 		private void btnAdauga_Click(object sender, RoutedEventArgs e)

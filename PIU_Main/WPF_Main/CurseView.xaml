@@ -3,38 +3,52 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition MinWidth="220" MaxWidth="350" Width="0.35*"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<StackPanel Grid.Column="0" Margin="10">
-			<TextBlock Text="Masina:" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,2"/>
-			<ComboBox x:Name="cmbMasina" Width="200" DisplayMemberPath="Model"
-					  SelectedItem="{Binding MasinaSelectata, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-					  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+		<ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+			<StackPanel Margin="10,10,20,10">
+				<TextBlock Text="Masina:" Foreground="White" HorizontalAlignment="Left" Margin="0,0,0,2"/>
+				<ComboBox x:Name="cmbMasina" HorizontalAlignment="Stretch" MinHeight="22" Padding="2" DisplayMemberPath="Model"
+						  SelectedItem="{Binding MasinaSelectata, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-			<TextBlock Text="Conducator:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
-			<ComboBox x:Name="cmbConducator" Width="200" DisplayMemberPath="Nume"
-					  SelectedItem="{Binding ConducatorSelectat, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-					  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				<TextBlock Text="Conducator:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
+				<ComboBox x:Name="cmbConducator" HorizontalAlignment="Stretch" MinHeight="22" Padding="2" DisplayMemberPath="Nume"
+						  SelectedItem="{Binding ConducatorSelectat, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-			<TextBlock Text="Distanța:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
-			<TextBox x:Name="Distanta" Width="200"
-					 Text="{Binding DistantaText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-					 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				<TextBlock Text="Distanța:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
+				<TextBox x:Name="Distanta" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"
+						 Text="{Binding DistantaText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+						 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-			<Button x:Name="Adauga" Content="Adaugă Cursă" Width="200" Margin="0,20,0,0" Click="Adauga_Click"/>
-			<TextBlock x:Name="MesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" Width="200" TextAlignment="Center"/>
-		</StackPanel>
+				<Button x:Name="Adauga" Content="Adaugă Cursă" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,20,0,0" Click="Adauga_Click"/>
+				<TextBlock x:Name="MesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" TextAlignment="Center"/>
+			</StackPanel>
+		</ScrollViewer>
 
-		<DataGrid Grid.Column="1" x:Name="CurseDataGrid" Margin="10" 
-				  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="Masină" Binding="{Binding Masina.Model}" />
-				<DataGridTextColumn Header="Conducător" Binding="{Binding Conducator.Nume}" />
-				<DataGridTextColumn Header="Distanță" Binding="{Binding Distanta}" />
-				<DataGridTextColumn Header="Stare" Binding="{Binding Stare}" />
-			</DataGrid.Columns>
-		</DataGrid>
+		<Grid Grid.Column="1" Margin="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+				<TextBlock Text="Căutare după Mașină/Șofer:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+				<TextBox x:Name="tbCautareCursa" Width="200" TextChanged="tbCautareCursa_TextChanged"/>
+			</StackPanel>
+
+			<DataGrid Grid.Row="1" x:Name="CurseDataGrid" 
+					  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Masină" Binding="{Binding Masina.Model}" />
+					<DataGridTextColumn Header="Conducător" Binding="{Binding Conducator.Nume}" />
+					<DataGridTextColumn Header="Distanță" Binding="{Binding Distanta}" />
+					<DataGridTextColumn Header="Stare" Binding="{Binding Stare}" />
+				</DataGrid.Columns>
+			</DataGrid>
+		</Grid>
 	</Grid>
 </UserControl>

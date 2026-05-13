@@ -81,6 +81,23 @@ namespace WPF_Main
 			var dateExistente = adminMasini.ObtineToateElementele();
 			masiniList = new ObservableCollection<MasinaModel>(dateExistente ?? new List<MasinaModel>());
 			MasiniDataGrid.ItemsSource = masiniList;
+
+			// Set up CollectionView filtering
+			CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(MasiniDataGrid.ItemsSource);
+			view.Filter = MasinaFiltru;
+		}
+
+		private void tbCautareModel_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			CollectionViewSource.GetDefaultView(MasiniDataGrid.ItemsSource).Refresh();
+		}
+
+		private bool MasinaFiltru(object item)
+		{
+			if (string.IsNullOrEmpty(tbCautareModel.Text))
+				return true;
+			else
+				return ((MasinaModel)item).Model.Contains(tbCautareModel.Text, StringComparison.OrdinalIgnoreCase);
 		}
 
 		private void Adauga_Click(object sender, RoutedEventArgs e)

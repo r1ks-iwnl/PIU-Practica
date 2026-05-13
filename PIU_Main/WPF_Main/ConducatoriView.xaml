@@ -1,48 +1,62 @@
 ﻿<UserControl x:Class="WPF_Main.ConducatoriView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid>
+	<Grid>
 		<Grid.ColumnDefinitions>
 			<!-- Coloana stanga pentru input -->
-			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition MinWidth="220" MaxWidth="350" Width="0.35*"/>
 			<!-- Coloana dreapta pentru afisare -->
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<StackPanel Grid.Column="0" Margin="10">
-			<TextBlock Text="Nume:" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,2"/>
-			<TextBox x:Name="tbNume" Width="200"
-					 Text="{Binding NumeText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-					 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+		<ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+			<StackPanel Margin="10,10,20,10">
+				<TextBlock Text="Nume:" Foreground="White" HorizontalAlignment="Left" Margin="0,0,0,2"/>
+				<TextBox x:Name="tbNume" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"
+						 Text="{Binding NumeText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+						 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-			<TextBlock Text="Prenume:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
-			<TextBox x:Name="tbPrenume" Width="200"
-					 Text="{Binding PrenumeText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-					 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				<TextBlock Text="Prenume:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
+				<TextBox x:Name="tbPrenume" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"
+						 Text="{Binding PrenumeText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+						 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-			<TextBlock Text="Data Naștere:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
-			<DatePicker x:Name="pickDataNastere" Width="200"
-						SelectedDate="{Binding DataNastere, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-						ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				<TextBlock Text="Data Naștere:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
+				<DatePicker x:Name="pickDataNastere" HorizontalAlignment="Stretch" MinHeight="24"
+							SelectedDate="{Binding DataNastere, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+							ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-			<TextBlock Text="Data Angajare:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
-			<DatePicker x:Name="pickDataAngajare" Width="200"
-						SelectedDate="{Binding DataAngajare, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-						ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				<TextBlock Text="Data Angajare:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
+				<DatePicker x:Name="pickDataAngajare" HorizontalAlignment="Stretch" MinHeight="24"
+							SelectedDate="{Binding DataAngajare, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+							ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-			<Button x:Name="btnAdauga" Content="Adaugă Conducător" Width="200" Margin="0,20,0,0" Click="btnAdauga_Click"/>
+				<Button x:Name="btnAdauga" Content="Adaugă Conducător" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,20,0,0" Click="btnAdauga_Click"/>
 
-			<TextBlock x:Name="tbMesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" Width="200" TextAlignment="Center"/>
-		</StackPanel>
+				<TextBlock x:Name="tbMesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" TextAlignment="Center"/>
+			</StackPanel>
+		</ScrollViewer>
 
-		<DataGrid Grid.Column="1" x:Name="ConducatoriDataGrid" Margin="10" 
-				  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="Nume" Binding="{Binding Nume}" />
-				<DataGridTextColumn Header="Data Angajare" Binding="{Binding DataAngajare}" />
-				<DataGridTextColumn Header="Data Naștere" Binding="{Binding DataNastere}" />
-				<DataGridTextColumn Header="Mașini" Binding="{Binding MasiniConduseDisplay}" />
-			</DataGrid.Columns>
-		</DataGrid>
+		<Grid Grid.Column="1" Margin="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+				<TextBlock Text="Căutare după Nume/Prenume:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+				<TextBox x:Name="tbCautareNume" Width="200" TextChanged="tbCautareNume_TextChanged"/>
+			</StackPanel>
+
+			<DataGrid Grid.Row="1" x:Name="ConducatoriDataGrid" 
+					  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Nume" Binding="{Binding Nume}" />
+					<DataGridTextColumn Header="Data Angajare" Binding="{Binding DataAngajare}" />
+					<DataGridTextColumn Header="Data Naștere" Binding="{Binding DataNastere}" />
+					<DataGridTextColumn Header="Mașini" Binding="{Binding MasiniConduseDisplay}" />
+				</DataGrid.Columns>
+			</DataGrid>
+		</Grid>
 	</Grid>
 </UserControl>

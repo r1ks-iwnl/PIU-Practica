@@ -103,6 +103,28 @@ namespace WPF_Main
 
 			cmbMasina.ItemsSource = adminMasini.ObtineToateElementele();
 			cmbConducator.ItemsSource = adminConducatori.ObtineToateElementele();
+
+			CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CurseDataGrid.ItemsSource);
+			view.Filter = CursaFiltru;
+		}
+
+		private void tbCautareCursa_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			CollectionViewSource.GetDefaultView(CurseDataGrid.ItemsSource).Refresh();
+		}
+
+		private bool CursaFiltru(object item)
+		{
+			if (string.IsNullOrEmpty(tbCautareCursa.Text))
+				return true;
+
+			var cursa = (CursaModel)item;
+			string search = tbCautareCursa.Text;
+
+			bool matchMasina = cursa.Masina?.Model?.Contains(search, StringComparison.OrdinalIgnoreCase) == true;
+			bool matchConducator = cursa.Conducator?.Nume?.Contains(search, StringComparison.OrdinalIgnoreCase) == true;
+
+			return matchMasina || matchConducator;
 		}
 
 		private void Adauga_Click(object sender, RoutedEventArgs e)
