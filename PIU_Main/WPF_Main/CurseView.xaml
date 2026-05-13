@@ -9,13 +9,19 @@
 
 		<StackPanel Grid.Column="0" Margin="10">
 			<TextBlock Text="Masina:" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,2"/>
-			<ComboBox x:Name="cmbMasina" Width="200" DisplayMemberPath="Model"/>
+			<ComboBox x:Name="cmbMasina" Width="200" DisplayMemberPath="Model"
+					  SelectedItem="{Binding MasinaSelectata, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+					  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
 			<TextBlock Text="Conducator:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
-			<ComboBox x:Name="cmbConducator" Width="200" DisplayMemberPath="Nume"/>
+			<ComboBox x:Name="cmbConducator" Width="200" DisplayMemberPath="Nume"
+					  SelectedItem="{Binding ConducatorSelectat, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+					  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
 			<TextBlock Text="Distanța:" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,2"/>
-			<TextBox x:Name="Distanta" Width="200"/>
+			<TextBox x:Name="Distanta" Width="200"
+					 Text="{Binding DistantaText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+					 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
 			<Button x:Name="Adauga" Content="Adaugă Cursă" Width="200" Margin="0,20,0,0" Click="Adauga_Click"/>
 			<TextBlock x:Name="MesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" Width="200" TextAlignment="Center"/>

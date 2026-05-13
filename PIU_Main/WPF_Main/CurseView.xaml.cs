@@ -18,9 +18,64 @@ using System.Windows.Shapes;
 using ConducatorModel = Conducator.Conducator;
 using MasinaModel = Masina.Masina;
 using CursaModel = Cursa.Cursa;
+using ComponentModel = System.ComponentModel;
 
 namespace WPF_Main
 {
+	public class CursaFormDraft : ComponentModel.INotifyPropertyChanged, ComponentModel.IDataErrorInfo
+	{
+		private const int MIN_DISTANTA = 1;
+
+		private string _distantaText = "";
+		public string DistantaText
+		{
+			get => _distantaText;
+			set { _distantaText = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(DistantaText))); }
+		}
+
+		private MasinaModel _masinaSelectata;
+		public MasinaModel MasinaSelectata
+		{
+			get => _masinaSelectata;
+			set { _masinaSelectata = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(MasinaSelectata))); }
+		}
+
+		private ConducatorModel _conducatorSelectat;
+		public ConducatorModel ConducatorSelectat
+		{
+			get => _conducatorSelectat;
+			set { _conducatorSelectat = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(ConducatorSelectat))); }
+		}
+
+		public string Error => null;
+
+		public string this[string columnName]
+		{
+			get
+			{
+				if (columnName == nameof(DistantaText))
+				{
+					if (string.IsNullOrWhiteSpace(DistantaText)) return "Distanța este obligatorie.";
+					if (!int.TryParse(DistantaText, out int dist)) return "Trebuie să introduceți un număr întreg.";
+					if (dist < MIN_DISTANTA) return $"Distanța minimă este de {MIN_DISTANTA} km.";
+				}
+				if (columnName == nameof(MasinaSelectata))
+				{
+					if (MasinaSelectata == null) return "Selectați o mașină.";
+				}
+				if (columnName == nameof(ConducatorSelectat))
+				{
+					if (ConducatorSelectat == null) return "Selectați un conducător.";
+				}
+				return null;
+			}
+		}
+
+		public bool IsValid => string.IsNullOrEmpty(this[nameof(DistantaText)]) && string.IsNullOrEmpty(this[nameof(MasinaSelectata)]) && string.IsNullOrEmpty(this[nameof(ConducatorSelectat)]);
+
+		public event ComponentModel.PropertyChangedEventHandler PropertyChanged;
+	}
+
 	/// <summary>
 	/// Interaction logic for UserControl1.xaml
 	/// </summary>
@@ -31,10 +86,12 @@ namespace WPF_Main
 		private static IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
 
 		private ObservableCollection<CursaModel> curseList;
+		public CursaFormDraft Draft { get; set; } = new CursaFormDraft();
 
 		public CurseView()
 		{
 			InitializeComponent();
+			DataContext = Draft;
 			IncarcaDate();
 		}
 
@@ -52,26 +109,24 @@ namespace WPF_Main
 		{
 			MesajStatus.Visibility = Visibility.Collapsed;
 
-			var masinaSelectata = cmbMasina.SelectedItem as MasinaModel;
-			var conducatorSelectat = cmbConducator.SelectedItem as ConducatorModel;
-
-			if (masinaSelectata == null || conducatorSelectat == null || !int.TryParse(Distanta.Text, out int dist))
+			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj("Selectați o mașină, un conducător și introduceți o distanță validă.", true);
+				AfiseazaMesaj("Vă rugăm să selectați entitățile și o distanță validă.", true);
 				return;
 			}
 
 			try
 			{
-				CursaModel nouaCursa = new CursaModel(dist, masinaSelectata, conducatorSelectat);
+				int dist = int.Parse(Draft.DistantaText);
+				CursaModel nouaCursa = new CursaModel(dist, Draft.MasinaSelectata, Draft.ConducatorSelectat);
 				adminCurse.AdaugaElement(nouaCursa);
 				curseList.Add(nouaCursa);
 
 				AfiseazaMesaj("Cursă adăugată cu succes!", false);
 
-				Distanta.Clear();
-				cmbMasina.SelectedItem = null;
-				cmbConducator.SelectedItem = null;
+				Draft.DistantaText = string.Empty;
+				Draft.MasinaSelectata = null;
+				Draft.ConducatorSelectat = null;
 			}
 			catch (Exception ex)
 			{
