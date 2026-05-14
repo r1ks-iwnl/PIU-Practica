@@ -190,6 +190,46 @@ namespace WPF_Main
 			}
 		}
 
+		private void Sterge_Click(object sender, RoutedEventArgs e)
+		{
+			MesajStatus.Visibility = Visibility.Collapsed;
+
+			if (cursaSelectata == null)
+			{
+				AfiseazaMesaj("Selectați o cursă din listă pentru ștergere.", true);
+				return;
+			}
+
+			MessageBoxResult confirmare = MessageBox.Show(
+				$"Sigur doriți să ștergeți cursa pentru mașina '{cursaSelectata.Masina?.Model}'?",
+				"Confirmare ștergere",
+				MessageBoxButton.YesNo,
+				MessageBoxImage.Warning);
+
+			if (confirmare != MessageBoxResult.Yes)
+			{
+				return;
+			}
+
+			try
+			{
+				adminCurse.EliminaElement(cursaSelectata);
+				IncarcaDate();
+				cursaSelectata = null;
+				CurseDataGrid.SelectedItem = null;
+
+				Draft.DistantaText = string.Empty;
+				Draft.MasinaSelectata = null;
+				Draft.ConducatorSelectat = null;
+
+				AfiseazaMesaj("Cursa a fost ștearsă cu succes!", false);
+			}
+			catch (Exception ex)
+			{
+				AfiseazaMesaj($"Eroare la ștergerea cursei: {ex.Message}", true);
+			}
+		}
+
 		private void CurseDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			cursaSelectata = CurseDataGrid.SelectedItem as CursaModel;

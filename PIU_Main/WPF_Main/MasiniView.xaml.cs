@@ -182,6 +182,53 @@ namespace WPF_Main
 			}
 		}
 
+		private void Sterge_Click(object sender, RoutedEventArgs e)
+		{
+			MesajStatus.Visibility = Visibility.Collapsed;
+
+			if (masinaSelectata == null)
+			{
+				AfiseazaMesaj("Selectați o mașină din listă pentru ștergere.", true);
+				return;
+			}
+
+			MessageBoxResult confirmare = MessageBox.Show(
+				$"Sigur doriți să ștergeți mașina '{masinaSelectata.Model}'?",
+				"Confirmare ștergere",
+				MessageBoxButton.YesNo,
+				MessageBoxImage.Warning);
+
+			if (confirmare != MessageBoxResult.Yes)
+			{
+				return;
+			}
+
+			try
+			{
+				adminMasini.EliminaElement(masinaSelectata);
+				IncarcaDate();
+				masinaSelectata = null;
+				MasiniDataGrid.SelectedItem = null;
+
+				Draft.ModelText = string.Empty;
+				cmbAn.SelectedItem = DateTime.Now.Year;
+				rbRosu.IsChecked = false;
+				rbAlb.IsChecked = false;
+				rbNegru.IsChecked = false;
+				cbAerCond.IsChecked = false;
+				cbNavigatie.IsChecked = false;
+				cbCutieAutom.IsChecked = false;
+				cbSenzoriParc.IsChecked = false;
+				cbCameraMarș.IsChecked = false;
+
+				AfiseazaMesaj("Mașina a fost ștearsă cu succes!", false);
+			}
+			catch (Exception ex)
+			{
+				AfiseazaMesaj($"Eroare la ștergerea mașinii: {ex.Message}", true);
+			}
+		}
+
 		private void MasiniDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			masinaSelectata = MasiniDataGrid.SelectedItem as MasinaModel;

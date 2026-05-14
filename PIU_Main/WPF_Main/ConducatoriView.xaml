@@ -33,6 +33,7 @@
 
 				<Button x:Name="btnAdauga" Content="Adaugă Conducător" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,20,0,0" Click="btnAdauga_Click"/>
 				<Button x:Name="btnModifica" Content="Modifică Conducător" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="btnModifica_Click"/>
+				<Button x:Name="btnSterge" Content="Șterge Conducător" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="btnSterge_Click"/>
 
 				<TextBlock x:Name="tbMesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" TextAlignment="Center"/>
 			</StackPanel>

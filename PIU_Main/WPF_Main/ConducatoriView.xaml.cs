@@ -213,6 +213,47 @@ namespace WPF_Main
 			}
 		}
 
+		private void btnSterge_Click(object sender, RoutedEventArgs e)
+		{
+			tbMesajStatus.Visibility = Visibility.Collapsed;
+
+			if (conducatorSelectat == null)
+			{
+				AfiseazaMesaj("Selectați un conducător din listă pentru ștergere.", true);
+				return;
+			}
+
+			MessageBoxResult confirmare = MessageBox.Show(
+				$"Sigur doriți să ștergeți conducătorul '{conducatorSelectat.Nume}'?",
+				"Confirmare ștergere",
+				MessageBoxButton.YesNo,
+				MessageBoxImage.Warning);
+
+			if (confirmare != MessageBoxResult.Yes)
+			{
+				return;
+			}
+
+			try
+			{
+				adminConducatori.EliminaElement(conducatorSelectat);
+				IncarcaDate();
+				conducatorSelectat = null;
+				ConducatoriDataGrid.SelectedItem = null;
+
+				Draft.NumeText = string.Empty;
+				Draft.PrenumeText = string.Empty;
+				Draft.DataNastere = null;
+				Draft.DataAngajare = null;
+
+				AfiseazaMesaj("Conducătorul a fost șters cu succes!", false);
+			}
+			catch (Exception ex)
+			{
+				AfiseazaMesaj($"Eroare la ștergerea conducătorului: {ex.Message}", true);
+			}
+		}
+
 		private void ConducatoriDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			conducatorSelectat = ConducatoriDataGrid.SelectedItem as ConducatorModel;
