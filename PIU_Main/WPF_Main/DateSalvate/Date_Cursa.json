@@ -20,46 +20,6 @@
     "Stare": 0
   },
   {
-    "Id": "7f286b6d-094d-4392-9fac-0ea157f62583",
-    "Distanta": 45,
-    "Masina": {
-      "Id": "ce271e17-bdc8-45af-8a42-8a69b3e1163b",
-      "Model": "Dacia Logan",
-      "An": 2022,
-      "Culoare": 2,
-      "Optiuni": 9,
-      "DistParcursa": 0
-    },
-    "Conducator": {
-      "Id": "5dd9cb25-f132-44e4-b577-b651f4214b84",
-      "Nume": "Ion Popescu",
-      "DataNastere": "15-05-1985",
-      "DataAngajare": "01-02-2010",
-      "DistCondusa": 0
-    },
-    "Stare": 0
-  },
-  {
-    "Id": "ee8d231a-d021-44c1-8ebd-74dc1805b0ca",
-    "Distanta": 75,
-    "Masina": {
-      "Id": "37892af5-b96b-4322-8c3a-3d3ec0723e24",
-      "Model": "Tesla Model 3",
-      "An": 2023,
-      "Culoare": 3,
-      "Optiuni": 22,
-      "DistParcursa": 0
-    },
-    "Conducator": {
-      "Id": "5dd9cb25-f132-44e4-b577-b651f4214b84",
-      "Nume": "Ion Popescu",
-      "DataNastere": "15-05-1985",
-      "DataAngajare": "01-02-2010",
-      "DistCondusa": 0
-    },
-    "Stare": 0
-  },
-  {
     "Id": "b5392cde-402c-409a-855d-6165ca42919e",
     "Distanta": 50,
     "Masina": {

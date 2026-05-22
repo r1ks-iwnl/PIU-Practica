@@ -24,9 +24,9 @@
 						 Text="{Binding DistantaText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 						 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-				<Button x:Name="Adauga" Content="Adaugă Cursă" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,20,0,0" Click="Adauga_Click"/>
-				<Button x:Name="Modifica" Content="Modifică Cursă" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="Modifica_Click"/>
-				<Button x:Name="Sterge" Content="Șterge Cursă" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="Sterge_Click"/>
+				<Button x:Name="Adauga" Style="{StaticResource ActionButton}" Content="Adaugă Cursă" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,20,0,0" Click="Adauga_Click"/>
+				<Button x:Name="Modifica" Style="{StaticResource ActionButton}" Content="Modifică Cursă" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="Modifica_Click"/>
+				<Button x:Name="Sterge" Style="{StaticResource ActionButton}" Content="Șterge Cursă" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="Sterge_Click"/>
 				<TextBlock x:Name="MesajStatus" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed" TextAlignment="Center"/>
 			</StackPanel>
 		</ScrollViewer>

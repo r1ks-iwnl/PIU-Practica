@@ -1,37 +1,246 @@
-﻿<Application x:Class="WPF_Main.App"
+<Application x:Class="WPF_Main.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WPF_Main"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="MDN" TargetType="Button">
-            <Setter Property="Background" Value="#312a64"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="10,5"/>
+        <!-- Paleta -->
+        <SolidColorBrush x:Key="MDNBackground" Color="#393473" />
+        <SolidColorBrush x:Key="MDNPanel" Color="#2A2559" />
+        <SolidColorBrush x:Key="MDNBorder" Color="#51498C" />
+        <SolidColorBrush x:Key="MDNText" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="MDNAccent" Color="#FF7139" />
+        <SolidColorBrush x:Key="MDNAccentHover" Color="#FF905E" />
+        <SolidColorBrush x:Key="MDNPrimaryButton" Color="#312a64" />
+        <SolidColorBrush x:Key="MDNPrimaryButtonHover" Color="#1d1844" />
+        <SolidColorBrush x:Key="MDNPrimaryButtonPressed" Color="#110d2b" />
+
+        <!-- TextBlock -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+
+        <!-- TextBox -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource MDNPanel}" />
+            <Setter Property="Foreground" Value="{StaticResource MDNText}" />
+            <Setter Property="BorderBrush" Value="{StaticResource MDNBorder}" />
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="CaretBrush" Value="{StaticResource MDNText}"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" 
-                                Background="{TemplateBinding Background}" 
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center"
-                                              Margin="{TemplateBinding Padding}"/>
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
                         </Border>
                         <ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter TargetName="border" Property="Background" Value="#1d1844"/>
-                            </Trigger>
-							<Trigger Property="IsPressed" Value="True">
-								<Setter TargetName="border" Property="Background" Value="#110d2b"/>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="{StaticResource MDNAccent}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Button-->
+        <Style x:Key="MDN" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource MDNPrimaryButton}"/>
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource MDNPrimaryButtonHover}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource MDNPrimaryButtonPressed}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Action Button -->
+        <Style x:Key="ActionButton" TargetType="Button" BasedOn="{StaticResource MDN}">
+            <Setter Property="Background" Value="{StaticResource MDNAccent}"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource MDNAccentHover}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{StaticResource MDNPanel}" />
+            <Setter Property="RowBackground" Value="{StaticResource MDNPanel}" />
+            <Setter Property="AlternatingRowBackground" Value="{StaticResource MDNPrimaryButton}" />
+            <Setter Property="Foreground" Value="{StaticResource MDNText}" />
+            <Setter Property="BorderBrush" Value="{StaticResource MDNBorder}" />
+            <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource MDNBorder}" />
+            <Setter Property="VerticalGridLinesBrush" Value="Transparent" />
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource MDNPrimaryButtonHover}" />
+            <Setter Property="Foreground" Value="{StaticResource MDNText}" />
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="BorderBrush" Value="{StaticResource MDNBorder}" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource MDNAccent}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="8,5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Background="Transparent" 
+                                BorderBrush="Transparent"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- CheckBox & RadioButton -->
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- ComboBox & DatePicker -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource MDNBorder}"/>
+        </Style>
+
+        <Style TargetType="ComboBoxItem">
+            <Style.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="{StaticResource MDNText}" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource MDNAccent}"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource MDNAccent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style TargetType="DatePickerTextBox">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
+        </Style>
+
+        <Style TargetType="CalendarItem">
+            <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource MDNBorder}"/>
+            <Setter Property="CalendarStyle">
+                <Setter.Value>
+                    <Style TargetType="Calendar">
+                        <Style.Resources>
+                            <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
+                                <TextBlock Text="{Binding}" 
+                                           Foreground="{StaticResource MDNText}" 
+                                           FontWeight="Bold" 
+                                           FontSize="11" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" 
+                                           Margin="0,6,0,6"/>
+                            </DataTemplate>
+                        </Style.Resources>
+                        <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
+                        <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="CalendarDayButton">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource MDNPrimaryButtonHover}"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource MDNAccent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="CalendarButton">
+            <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource MDNPrimaryButtonHover}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Application.Resources>
 </Application>
