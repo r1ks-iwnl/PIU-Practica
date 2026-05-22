@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ConducatorModel = Conducator.Conducator;
+using CursaModel = Cursa.Cursa;
 using AdministrareDate;
 using ComponentModel = System.ComponentModel;
 
@@ -104,6 +105,7 @@ namespace WPF_Main
 	{
 		private static ConducatorModel? conducatorCurent = null;
 		private static IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
+		private static IStocareData<CursaModel> adminCurse = StocareFactory.GetAdministratorStocare<CursaModel>();
 
 		private ObservableCollection<ConducatorModel> conducatoriList;
 		private ConducatorModel? conducatorSelectat;
@@ -220,6 +222,13 @@ namespace WPF_Main
 			if (conducatorSelectat == null)
 			{
 				AfiseazaMesaj("Selectați un conducător din listă pentru ștergere.", true);
+				return;
+			}
+
+			var curse = adminCurse.ObtineToateElementele();
+			if (curse.Any(c => c.Conducator != null && c.Conducator.Id == conducatorSelectat.Id))
+			{
+				AfiseazaMesaj("Nu se poate șterge conducătorul deoarece există curse asociate.", true);
 				return;
 			}
 

@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MasinaModel = Masina.Masina;
+using CursaModel = Cursa.Cursa;
 
 namespace WPF_Main
 {
@@ -57,6 +58,7 @@ namespace WPF_Main
 	public partial class MasiniView : UserControl
 	{
 		private static IStocareData<MasinaModel> adminMasini = StocareFactory.GetAdministratorStocare<MasinaModel>();
+		private static IStocareData<CursaModel> adminCurse = StocareFactory.GetAdministratorStocare<CursaModel>();
 		private ObservableCollection<MasinaModel> masiniList;
 		private MasinaModel? masinaSelectata;
 
@@ -125,7 +127,7 @@ namespace WPF_Main
 			if (cbNavigatie?.IsChecked == true) optiuni |= OptiuniMasina.Navigatie;
 			if (cbCutieAutom?.IsChecked == true) optiuni |= OptiuniMasina.CutieAutomata;
 			if (cbSenzoriParc?.IsChecked == true) optiuni |= OptiuniMasina.SenzoriParcare;
-			if (cbCameraMarș?.IsChecked == true) optiuni |= OptiuniMasina.CameraMarsarier;
+			if (cbCameraMars?.IsChecked == true) optiuni |= OptiuniMasina.CameraMarsarier;
 
 			try
 			{
@@ -192,6 +194,13 @@ namespace WPF_Main
 				return;
 			}
 
+			var curse = adminCurse.ObtineToateElementele();
+			if (curse.Any(c => c.Masina != null && c.Masina.Id == masinaSelectata.Id))
+			{
+				AfiseazaMesaj("Nu se poate șterge mașina deoarece există curse asociate.", true);
+				return;
+			}
+
 			MessageBoxResult confirmare = MessageBox.Show(
 				$"Sigur doriți să ștergeți mașina '{masinaSelectata.Model}'?",
 				"Confirmare ștergere",
@@ -219,7 +228,7 @@ namespace WPF_Main
 				cbNavigatie.IsChecked = false;
 				cbCutieAutom.IsChecked = false;
 				cbSenzoriParc.IsChecked = false;
-				cbCameraMarș.IsChecked = false;
+				cbCameraMars.IsChecked = false;
 
 				AfiseazaMesaj("Mașina a fost ștearsă cu succes!", false);
 			}
@@ -264,7 +273,7 @@ namespace WPF_Main
 			cbNavigatie.IsChecked = optiuni.HasFlag(OptiuniMasina.Navigatie);
 			cbCutieAutom.IsChecked = optiuni.HasFlag(OptiuniMasina.CutieAutomata);
 			cbSenzoriParc.IsChecked = optiuni.HasFlag(OptiuniMasina.SenzoriParcare);
-			cbCameraMarș.IsChecked = optiuni.HasFlag(OptiuniMasina.CameraMarsarier);
+			cbCameraMars.IsChecked = optiuni.HasFlag(OptiuniMasina.CameraMarsarier);
 		}
 
 		private OptiuniMasina CitesteOptiuniSelectate()
@@ -274,7 +283,7 @@ namespace WPF_Main
 			if (cbNavigatie?.IsChecked == true) optiuni |= OptiuniMasina.Navigatie;
 			if (cbCutieAutom?.IsChecked == true) optiuni |= OptiuniMasina.CutieAutomata;
 			if (cbSenzoriParc?.IsChecked == true) optiuni |= OptiuniMasina.SenzoriParcare;
-			if (cbCameraMarș?.IsChecked == true) optiuni |= OptiuniMasina.CameraMarsarier;
+			if (cbCameraMars?.IsChecked == true) optiuni |= OptiuniMasina.CameraMarsarier;
 			return optiuni;
 		}
 

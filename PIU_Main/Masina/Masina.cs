@@ -23,7 +23,7 @@ namespace Masina
 
 	public class Masina
 	{
-		public Guid Id { get; init; } = Guid.NewGuid();
+		public Guid Id { get; init; } = Guid.NewGuid(); // adauga numar inmatriculare
 		public required string Model { get; init; }
 		public required int An { get; init; }
 		public CuloareMasina Culoare { get; init; }
