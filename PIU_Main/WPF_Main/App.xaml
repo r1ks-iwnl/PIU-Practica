@@ -5,7 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!-- Paleta -->
-        <SolidColorBrush x:Key="MDNBackground" Color="#393473" />
+        <SolidColorBrush x:Key="MDNBackground" Color="#392473" />
         <SolidColorBrush x:Key="MDNPanel" Color="#2A2559" />
         <SolidColorBrush x:Key="MDNBorder" Color="#51498C" />
         <SolidColorBrush x:Key="MDNText" Color="#FFFFFF" />
@@ -188,10 +188,6 @@
             <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
         </Style>
 
-        <Style TargetType="CalendarItem">
-            <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
-        </Style>
-
         <Style TargetType="DatePicker">
             <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
             <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
@@ -199,19 +195,201 @@
             <Setter Property="CalendarStyle">
                 <Setter.Value>
                     <Style TargetType="Calendar">
-                        <Style.Resources>
-                            <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
-                                <TextBlock Text="{Binding}" 
-                                           Foreground="{StaticResource MDNText}" 
-                                           FontWeight="Bold" 
-                                           FontSize="11" 
-                                           HorizontalAlignment="Center" 
-                                           VerticalAlignment="Center" 
-                                           Margin="0,6,0,6"/>
-                            </DataTemplate>
-                        </Style.Resources>
                         <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
                         <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
+                        <Setter Property="CalendarItemStyle">
+                            <Setter.Value>
+                                <Style TargetType="CalendarItem">
+                                    <Setter Property="Margin" Value="0,3,0,3" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="CalendarItem">
+                                                <ControlTemplate.Resources>
+                                                    <DataTemplate x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type CalendarItem}, ResourceId=DayTitleTemplate}">
+                                                        <TextBlock Text="{Binding}"
+                                                                   Foreground="{StaticResource MDNText}"
+                                                                   FontWeight="Bold"
+                                                                   FontSize="11"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center"
+                                                                   Margin="0,6,0,6"/>
+                                                    </DataTemplate>
+                                                </ControlTemplate.Resources>
+                                                <Grid Name="PART_Root">
+                                                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            Background="{TemplateBinding Background}"
+                                                            CornerRadius="1">
+                                                        <Border BorderThickness="2"
+                                                                BorderBrush="#FFFFFFFF"
+                                                                CornerRadius="1">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto" />
+                                                                    <RowDefinition Height="*" />
+                                                                </Grid.RowDefinitions>
+                                                                <Button Name="PART_PreviousButton"
+                                                                        Width="28"
+                                                                        Height="20"
+                                                                        HorizontalAlignment="Left"
+                                                                        Focusable="False"
+                                                                        Grid.Column="0"
+                                                                        Grid.Row="0">
+                                                                    <Button.Template>
+                                                                        <ControlTemplate TargetType="Button">
+                                                                            <Grid Cursor="Hand">
+                                                                                <Rectangle Stretch="Fill" Fill="Transparent" />
+                                                                                <Grid>
+                                                                                    <Path Data="M288.75,232.25L288.75,240.625 283,236.625z"
+                                                                                          Stretch="Fill"
+                                                                                          Fill="{StaticResource MDNText}"
+                                                                                          Width="6"
+                                                                                          Height="10"
+                                                                                          Margin="14,-6,0,0"
+                                                                                          HorizontalAlignment="Left"
+                                                                                          VerticalAlignment="Center" />
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                        </ControlTemplate>
+                                                                    </Button.Template>
+                                                                </Button>
+                                                                <Button Name="PART_HeaderButton"
+                                                                        FontSize="10.5"
+                                                                        FontWeight="Bold"
+                                                                        HorizontalAlignment="Center"
+                                                                        VerticalAlignment="Center"
+                                                                        Focusable="False"
+                                                                        Grid.Column="1"
+                                                                        Grid.Row="0">
+                                                                    <Button.Template>
+                                                                        <ControlTemplate TargetType="Button">
+                                                                            <Grid Cursor="Hand">
+                                                                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                                                  Margin="1,4,1,9"
+                                                                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                                                  TextElement.Foreground="{StaticResource MDNText}" />
+                                                                            </Grid>
+                                                                        </ControlTemplate>
+                                                                    </Button.Template>
+                                                                </Button>
+                                                                <Button Name="PART_NextButton"
+                                                                        Width="28"
+                                                                        Height="20"
+                                                                        HorizontalAlignment="Right"
+                                                                        Focusable="False"
+                                                                        Grid.Column="2"
+                                                                        Grid.Row="0">
+                                                                    <Button.Template>
+                                                                        <ControlTemplate TargetType="Button">
+                                                                            <Grid Cursor="Hand">
+                                                                                <Rectangle Stretch="Fill" Fill="Transparent" />
+                                                                                <Grid>
+                                                                                    <Path Data="M282.875,231.875L282.875,240.375 288.625,236z"
+                                                                                          Stretch="Fill"
+                                                                                          Fill="{StaticResource MDNText}"
+                                                                                          Width="6"
+                                                                                          Height="10"
+                                                                                          Margin="0,-6,14,0"
+                                                                                          HorizontalAlignment="Right"
+                                                                                          VerticalAlignment="Center" />
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                        </ControlTemplate>
+                                                                    </Button.Template>
+                                                                </Button>
+                                                                <Grid Name="PART_MonthView"
+                                                                      Margin="6,-1,6,6"
+                                                                      HorizontalAlignment="Center"
+                                                                      Visibility="Visible"
+                                                                      Grid.Row="1"
+                                                                      Grid.ColumnSpan="3">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                </Grid>
+                                                                <Grid Name="PART_YearView"
+                                                                      Margin="6,-3,7,6"
+                                                                      HorizontalAlignment="Center"
+                                                                      Visibility="Hidden"
+                                                                      Grid.Row="1"
+                                                                      Grid.ColumnSpan="3">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Border>
+                                                    <Rectangle Name="PART_DisabledVisual"
+                                                               RadiusX="2"
+                                                               RadiusY="2"
+                                                               Stretch="Fill"
+                                                               Fill="#A5FFFFFF"
+                                                               Stroke="#A5FFFFFF"
+                                                               StrokeThickness="1"
+                                                               Opacity="0"
+                                                               Visibility="Collapsed" />
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter TargetName="PART_DisabledVisual" Property="Visibility" Value="Visible" />
+                                                    </Trigger>
+                                                    <DataTrigger Binding="{Binding Path=DisplayMode, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Calendar}}" Value="Year">
+                                                        <Setter TargetName="PART_MonthView" Property="Visibility" Value="Hidden" />
+                                                        <Setter TargetName="PART_YearView" Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=DisplayMode, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Calendar}}" Value="Decade">
+                                                        <Setter TargetName="PART_MonthView" Property="Visibility" Value="Hidden" />
+                                                        <Setter TargetName="PART_YearView" Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="White" />
+                            <SolidColorBrush x:Key="SystemControlForegroundBaseMediumBrush" Color="White" />
+                            <SolidColorBrush x:Key="SystemControlForegroundBaseMediumHighBrush" Color="White" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="White" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.GrayTextBrushKey}" Color="White" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowTextBrushKey}" Color="White" />
+                            <SolidColorBrush x:Key="CalendarDayTitleForeground" Color="White" />
+                            <SolidColorBrush x:Key="CalendarDayTitleForegroundDisabled" Color="White" />
+                            <SolidColorBrush x:Key="CalendarDayTitleForegroundPointerOver" Color="White" />
+                        </Style.Resources>
                     </Style>
                 </Setter.Value>
             </Setter>
