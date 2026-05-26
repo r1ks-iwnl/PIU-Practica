@@ -32,6 +32,13 @@ namespace WPF_Main
 				set => SetField(ref _modelText, value, nameof(ModelText));
 		}
 
+		private string _numarInmatriculare = "";
+		public string NumarInmatriculareText
+		{
+			get => _numarInmatriculare;
+			set => SetField(ref _numarInmatriculare, value, nameof(NumarInmatriculareText));
+		}
+
 			public override string this[string columnName]
 		{
 			get
@@ -41,11 +48,17 @@ namespace WPF_Main
 					if (string.IsNullOrWhiteSpace(ModelText)) return "Vă rugăm să introduceți un model.";
 					if (ModelText.Length < 2) return "Modelul trebuie să aibă cel puțin 2 caractere.";
 				}
+				if (columnName == nameof(NumarInmatriculareText))
+				{
+					if (string.IsNullOrWhiteSpace(NumarInmatriculareText)) return "Numărul de înmatriculare este obligatoriu.";
+					if (NumarInmatriculareText.Trim().Length < 4) return "Numărul de înmatriculare pare prea scurt.";
+					if (NumarInmatriculareText.Trim().Length > 12) return "Numărul de înmatriculare pare prea lung.";
+				}
 				return null;
 			}
 		}
 
-			public bool IsValid => AreValid(nameof(ModelText));
+			public bool IsValid => AreValid(nameof(ModelText), nameof(NumarInmatriculareText));
 	}
 
 	/// <summary>
@@ -127,13 +140,15 @@ namespace WPF_Main
 
 			try
 			{
-				MasinaModel nouaMasina = new MasinaModel(model, an, culoare, optiuni);
+					string numar = Draft.NumarInmatriculareText.Trim();
+					MasinaModel nouaMasina = new MasinaModel(model, an, culoare, optiuni, numar);
 
 				adminMasini.AdaugaElement(nouaMasina);
 				masiniList.Add(nouaMasina);
 
 				AfiseazaMesaj("Mașină adăugată cu succes!", false);
-				Draft.ModelText = string.Empty;
+					Draft.ModelText = string.Empty;
+					Draft.NumarInmatriculareText = string.Empty;
 				cmbAn.SelectedItem = DateTime.Now.Year;
 			}
 			catch (Exception ex)
@@ -166,7 +181,7 @@ namespace WPF_Main
 				CuloareMasina culoare = CitesteCuloareSelectata();
 				OptiuniMasina optiuni = CitesteOptiuniSelectate();
 
-				MasinaModel masinaModificata = masinaSelectata.CreeazaCopieModificata(model, an, culoare, optiuni);
+					MasinaModel masinaModificata = masinaSelectata.CreeazaCopieModificata(model, an, culoare, optiuni, Draft.NumarInmatriculareText.Trim());
 				adminMasini.ActualizeazaElement(masinaModificata);
 				IncarcaDate();
 				masinaSelectata = masinaModificata;
@@ -246,6 +261,7 @@ namespace WPF_Main
 			cmbAn.SelectedItem = masinaSelectata.An;
 			SeteazaCuloare(masinaSelectata.Culoare);
 			SeteazaOptiuni(masinaSelectata.Optiuni);
+			Draft.NumarInmatriculareText = masinaSelectata.NumarInmatriculare;
 		}
 
 		private void SeteazaCuloare(CuloareMasina culoare)

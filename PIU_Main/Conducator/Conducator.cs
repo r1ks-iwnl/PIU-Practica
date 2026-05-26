@@ -8,15 +8,17 @@ namespace Conducator
 		public required string Nume { get; init; }
 		public required string DataNastere { get; init; }
 		public required string DataAngajare { get; init; }
+		public string DataExpirarePermis { get; init; } = string.Empty;
 		private readonly List<string> _masiniConduse = new();
 		public int DistCondusa { get; }
 
 		[SetsRequiredMembers]
-		public Conducator(string nume, string dataNastere, string dataAngajare)
+		public Conducator(string nume, string dataNastere, string dataAngajare, string dataExpirarePermis = "")
 		{
 			Nume = nume;
 			DataNastere = dataNastere;
 			DataAngajare = dataAngajare;
+			DataExpirarePermis = dataExpirarePermis;
 		}
 
 		public void MasinaNoua(string modelMasina)
@@ -24,9 +26,10 @@ namespace Conducator
 			_masiniConduse.Add(modelMasina);
 		}
 
-		public Conducator CreeazaCopieModificata(string nume, string dataNastere, string dataAngajare)
+		public Conducator CreeazaCopieModificata(string nume, string dataNastere, string dataAngajare, string? dataExpirarePermis = null)
 		{
-			Conducator conducatorModificat = new Conducator(nume, dataNastere, dataAngajare)
+			string dataExp = dataExpirarePermis ?? DataExpirarePermis;
+			Conducator conducatorModificat = new Conducator(nume, dataNastere, dataAngajare, dataExp)
 			{
 				Id = Id
 			};

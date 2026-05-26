@@ -29,15 +29,17 @@ namespace Masina
 		public CuloareMasina Culoare { get; init; }
 		public OptiuniMasina Optiuni { get; init; }
 		public int DistParcursa { get; }
+		public string NumarInmatriculare { get; init; } = string.Empty;
 		private readonly List<ConducatorModel> _condDisp = new();
 
 		[SetsRequiredMembers]
-		public Masina(string model, int an, CuloareMasina culoare, OptiuniMasina optiuni)
+		public Masina(string model, int an, CuloareMasina culoare, OptiuniMasina optiuni, string numarInmatriculare = "")
 		{
 			Model = model;
 			An = an;
 			Culoare = culoare;
 			Optiuni = optiuni;
+			NumarInmatriculare = numarInmatriculare;
 		}
 
 		public void AdaugaConducator(ConducatorModel condNou)
@@ -45,9 +47,10 @@ namespace Masina
 			_condDisp.Add(condNou);
 		}
 
-		public Masina CreeazaCopieModificata(string model, int an, CuloareMasina culoare, OptiuniMasina optiuni)
+		public Masina CreeazaCopieModificata(string model, int an, CuloareMasina culoare, OptiuniMasina optiuni, string? numarInmatriculare = null)
 		{
-			Masina masinaModificata = new Masina(model, an, culoare, optiuni)
+			string numar = numarInmatriculare ?? NumarInmatriculare;
+			Masina masinaModificata = new Masina(model, an, culoare, optiuni, numar)
 			{
 				Id = Id
 			};

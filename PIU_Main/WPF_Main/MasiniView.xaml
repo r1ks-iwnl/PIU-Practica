@@ -15,6 +15,10 @@
 						 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
 				<TextBlock Text="An:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
 				<ComboBox x:Name="cmbAn" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"/>
+				<TextBlock Text="Număr înmatriculare:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
+				<TextBox x:Name="tbNumar" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"
+					 Text="{Binding NumarInmatriculareText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+					 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
 				<TextBlock Text="Culoare:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
 					<RadioButton x:Name="rbRosu" GroupName="rbCuloare" Content="Roșu" Foreground="White" Margin="0,0,10,0"/>
@@ -56,6 +60,7 @@
 					<DataGridTextColumn Header="Culoare" Binding="{Binding Culoare}" />
 					<DataGridTextColumn Header="Opțiuni" Binding="{Binding Optiuni}" />
 					<DataGridTextColumn Header="Distanță Parcursă" Binding="{Binding DistParcursa}" />
+					<DataGridTextColumn Header="Nr. înmatriculare" Binding="{Binding NumarInmatriculare}" />
 				</DataGrid.Columns>
 			</DataGrid>
 		</Grid>

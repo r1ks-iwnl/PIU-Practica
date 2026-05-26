@@ -31,6 +31,11 @@
 							SelectedDate="{Binding DataAngajare, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 							ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
+				<TextBlock Text="Data expirare permis:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
+				<DatePicker x:Name="pickDataExpirarePermis" HorizontalAlignment="Stretch" MinHeight="24"
+						SelectedDate="{Binding DataExpirarePermis, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+						ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+
 				<Button x:Name="btnAdauga" Style="{StaticResource ActionButton}" Content="Adaugă Conducător" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,20,0,0" Click="btnAdauga_Click"/>
 				<Button x:Name="btnModifica" Style="{StaticResource ActionButton}" Content="Modifică Conducător" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="btnModifica_Click"/>
 				<Button x:Name="btnSterge" Style="{StaticResource ActionButton}" Content="Șterge Conducător" HorizontalAlignment="Stretch" MinHeight="30" Margin="0,10,0,0" Click="btnSterge_Click"/>
@@ -55,6 +60,7 @@
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Nume" Binding="{Binding Nume}" />
 					<DataGridTextColumn Header="Data Angajare" Binding="{Binding DataAngajare}" />
+					<DataGridTextColumn Header="Data expirare permis" Binding="{Binding DataExpirarePermis}" />
 					<DataGridTextColumn Header="Data Naștere" Binding="{Binding DataNastere}" />
 					<DataGridTextColumn Header="Mașini" Binding="{Binding MasiniConduseDisplay}" />
 				</DataGrid.Columns>

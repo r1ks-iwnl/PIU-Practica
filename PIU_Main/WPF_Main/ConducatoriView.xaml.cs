@@ -20,7 +20,7 @@ using ComponentModel = System.ComponentModel;
 
 namespace WPF_Main
 {
-		public class ConducatorFormDraft : FormDraftBase
+	public class ConducatorFormDraft : ComponentModel.INotifyPropertyChanged, ComponentModel.IDataErrorInfo
 	{
 		private const int MIN_LUNGIME_NUME = 2;
 		private const int VARSTA_MINIMA = 18;
@@ -29,31 +29,33 @@ namespace WPF_Main
 		public string NumeText
 		{
 			get => _numeText;
-				set => SetField(ref _numeText, value, nameof(NumeText));
+			set { _numeText = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(NumeText))); }
 		}
 
 		private string _prenumeText = "";
 		public string PrenumeText
 		{
 			get => _prenumeText;
-				set => SetField(ref _prenumeText, value, nameof(PrenumeText));
+			set { _prenumeText = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(PrenumeText))); }
 		}
 
 		private DateTime? _dataNastere;
 		public DateTime? DataNastere
 		{
 			get => _dataNastere;
-				set => SetField(ref _dataNastere, value, nameof(DataNastere));
+			set { _dataNastere = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(DataNastere))); }
 		}
 
 		private DateTime? _dataAngajare;
 		public DateTime? DataAngajare
 		{
 			get => _dataAngajare;
-				set => SetField(ref _dataAngajare, value, nameof(DataAngajare));
+			set { _dataAngajare = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(DataAngajare))); }
 		}
 
-			public override string this[string columnName]
+		public string Error => null;
+
+		public string this[string columnName]
 		{
 			get
 			{
@@ -91,8 +93,24 @@ namespace WPF_Main
 			}
 		}
 
-			public bool IsValid => AreValid(nameof(NumeText), nameof(PrenumeText), nameof(DataNastere), nameof(DataAngajare));
+		public bool IsValid => string.IsNullOrEmpty(this[nameof(NumeText)]) && string.IsNullOrEmpty(this[nameof(PrenumeText)]) && string.IsNullOrEmpty(this[nameof(DataNastere)]) && string.IsNullOrEmpty(this[nameof(DataAngajare)]);
 
+		public string? ObtinePrimulMesajEroare()
+		{
+			string[] campuri = { nameof(NumeText), nameof(PrenumeText), nameof(DataNastere), nameof(DataAngajare) };
+			foreach (string camp in campuri)
+			{
+				string mesaj = this[camp];
+				if (!string.IsNullOrEmpty(mesaj))
+				{
+					return mesaj;
+				}
+			}
+
+			return null;
+		}
+
+		public event ComponentModel.PropertyChangedEventHandler PropertyChanged;
 	}
 
 	/// <summary>
@@ -148,7 +166,7 @@ namespace WPF_Main
 
 			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj(Draft.GetFirstError(nameof(ConducatorFormDraft.NumeText), nameof(ConducatorFormDraft.PrenumeText), nameof(ConducatorFormDraft.DataNastere), nameof(ConducatorFormDraft.DataAngajare)) ?? "Vă rugăm să corectați erorile de pe formular.", true);
+				AfiseazaMesaj(Draft.ObtinePrimulMesajEroare() ?? "Vă rugăm să corectați erorile de pe formular.", true);
 				return;
 			}
 
@@ -188,7 +206,7 @@ namespace WPF_Main
 
 			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj(Draft.GetFirstError(nameof(ConducatorFormDraft.NumeText), nameof(ConducatorFormDraft.PrenumeText), nameof(ConducatorFormDraft.DataNastere), nameof(ConducatorFormDraft.DataAngajare)) ?? "Vă rugăm să corectați erorile de pe formular.", true);
+				AfiseazaMesaj(Draft.ObtinePrimulMesajEroare() ?? "Vă rugăm să corectați erorile de pe formular.", true);
 				return;
 			}
 
