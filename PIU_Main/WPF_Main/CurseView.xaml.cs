@@ -22,7 +22,7 @@ using ComponentModel = System.ComponentModel;
 
 namespace WPF_Main
 {
-	public class CursaFormDraft : ComponentModel.INotifyPropertyChanged, ComponentModel.IDataErrorInfo
+		public class CursaFormDraft : FormDraftBase
 	{
 		private const int MIN_DISTANTA = 1;
 
@@ -30,26 +30,24 @@ namespace WPF_Main
 		public string DistantaText
 		{
 			get => _distantaText;
-			set { _distantaText = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(DistantaText))); }
+				set => SetField(ref _distantaText, value, nameof(DistantaText));
 		}
 
 		private MasinaModel _masinaSelectata;
 		public MasinaModel MasinaSelectata
 		{
 			get => _masinaSelectata;
-			set { _masinaSelectata = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(MasinaSelectata))); }
+				set => SetField(ref _masinaSelectata, value, nameof(MasinaSelectata));
 		}
 
 		private ConducatorModel _conducatorSelectat;
 		public ConducatorModel ConducatorSelectat
 		{
 			get => _conducatorSelectat;
-			set { _conducatorSelectat = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(ConducatorSelectat))); }
+				set => SetField(ref _conducatorSelectat, value, nameof(ConducatorSelectat));
 		}
 
-		public string Error => null;
-
-		public string this[string columnName]
+			public override string this[string columnName]
 		{
 			get
 			{
@@ -71,9 +69,7 @@ namespace WPF_Main
 			}
 		}
 
-		public bool IsValid => string.IsNullOrEmpty(this[nameof(DistantaText)]) && string.IsNullOrEmpty(this[nameof(MasinaSelectata)]) && string.IsNullOrEmpty(this[nameof(ConducatorSelectat)]);
-
-		public event ComponentModel.PropertyChangedEventHandler PropertyChanged;
+			public bool IsValid => AreValid(nameof(DistantaText), nameof(MasinaSelectata), nameof(ConducatorSelectat));
 	}
 
 	/// <summary>

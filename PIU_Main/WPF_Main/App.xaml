@@ -5,7 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!-- Paleta -->
-        <SolidColorBrush x:Key="MDNBackground" Color="#392473" />
+        <SolidColorBrush x:Key="MDNBackground" Color="#393473" />
         <SolidColorBrush x:Key="MDNPanel" Color="#2A2559" />
         <SolidColorBrush x:Key="MDNBorder" Color="#51498C" />
         <SolidColorBrush x:Key="MDNText" Color="#FFFFFF" />
@@ -188,6 +188,7 @@
             <Setter Property="Background" Value="{StaticResource MDNPanel}"/>
         </Style>
 
+        <!-- Calendar redefinit -->
         <Style TargetType="DatePicker">
             <Setter Property="Foreground" Value="{StaticResource MDNText}"/>
             <Setter Property="Background" Value="{StaticResource MDNPanel}"/>

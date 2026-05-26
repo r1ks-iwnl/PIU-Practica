@@ -20,7 +20,7 @@ using ComponentModel = System.ComponentModel;
 
 namespace WPF_Main
 {
-	public class ConducatorFormDraft : ComponentModel.INotifyPropertyChanged, ComponentModel.IDataErrorInfo
+		public class ConducatorFormDraft : FormDraftBase
 	{
 		private const int MIN_LUNGIME_NUME = 2;
 		private const int VARSTA_MINIMA = 18;
@@ -29,33 +29,31 @@ namespace WPF_Main
 		public string NumeText
 		{
 			get => _numeText;
-			set { _numeText = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(NumeText))); }
+				set => SetField(ref _numeText, value, nameof(NumeText));
 		}
 
 		private string _prenumeText = "";
 		public string PrenumeText
 		{
 			get => _prenumeText;
-			set { _prenumeText = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(PrenumeText))); }
+				set => SetField(ref _prenumeText, value, nameof(PrenumeText));
 		}
 
 		private DateTime? _dataNastere;
 		public DateTime? DataNastere
 		{
 			get => _dataNastere;
-			set { _dataNastere = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(DataNastere))); }
+				set => SetField(ref _dataNastere, value, nameof(DataNastere));
 		}
 
 		private DateTime? _dataAngajare;
 		public DateTime? DataAngajare
 		{
 			get => _dataAngajare;
-			set { _dataAngajare = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(DataAngajare))); }
+				set => SetField(ref _dataAngajare, value, nameof(DataAngajare));
 		}
 
-		public string Error => null;
-
-		public string this[string columnName]
+			public override string this[string columnName]
 		{
 			get
 			{
@@ -93,9 +91,8 @@ namespace WPF_Main
 			}
 		}
 
-		public bool IsValid => string.IsNullOrEmpty(this[nameof(NumeText)]) && string.IsNullOrEmpty(this[nameof(PrenumeText)]) && string.IsNullOrEmpty(this[nameof(DataNastere)]) && string.IsNullOrEmpty(this[nameof(DataAngajare)]);
+			public bool IsValid => AreValid(nameof(NumeText), nameof(PrenumeText), nameof(DataNastere), nameof(DataAngajare));
 
-		public event ComponentModel.PropertyChangedEventHandler PropertyChanged;
 	}
 
 	/// <summary>
@@ -151,7 +148,7 @@ namespace WPF_Main
 
 			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj("Vă rugăm să corectați erorile de pe formular.", true);
+				AfiseazaMesaj(Draft.GetFirstError(nameof(ConducatorFormDraft.NumeText), nameof(ConducatorFormDraft.PrenumeText), nameof(ConducatorFormDraft.DataNastere), nameof(ConducatorFormDraft.DataAngajare)) ?? "Vă rugăm să corectați erorile de pe formular.", true);
 				return;
 			}
 
@@ -191,7 +188,7 @@ namespace WPF_Main
 
 			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj("Vă rugăm să corectați erorile de pe formular.", true);
+				AfiseazaMesaj(Draft.GetFirstError(nameof(ConducatorFormDraft.NumeText), nameof(ConducatorFormDraft.PrenumeText), nameof(ConducatorFormDraft.DataNastere), nameof(ConducatorFormDraft.DataAngajare)) ?? "Vă rugăm să corectați erorile de pe formular.", true);
 				return;
 			}
 

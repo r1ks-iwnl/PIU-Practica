@@ -23,18 +23,16 @@ namespace WPF_Main
 {
 	using ComponentModel = System.ComponentModel;
 
-	public class MasinaFormDraft : ComponentModel.INotifyPropertyChanged, ComponentModel.IDataErrorInfo
+		public class MasinaFormDraft : FormDraftBase
 	{
 		private string _modelText = "";
 		public string ModelText
 		{
 			get => _modelText;
-			set { _modelText = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(ModelText))); }
+				set => SetField(ref _modelText, value, nameof(ModelText));
 		}
 
-		public string Error => null;
-
-		public string this[string columnName]
+			public override string this[string columnName]
 		{
 			get
 			{
@@ -47,9 +45,7 @@ namespace WPF_Main
 			}
 		}
 
-		public bool IsValid => string.IsNullOrEmpty(this[nameof(ModelText)]);
-
-		public event ComponentModel.PropertyChangedEventHandler PropertyChanged;
+			public bool IsValid => AreValid(nameof(ModelText));
 	}
 
 	/// <summary>
