@@ -18,30 +18,47 @@ namespace Cursa
 		public required int Distanta { get; init; }
 		public required MasinaModel Masina { get; init; }
 		public required ConducatorModel Conducator { get; init; }
-		public StareCursa Stare { get; }
+		public required DateTime DataStart { get; init; }
+
+		public StareCursa Stare
+		{
+			get
+			{
+				if (DateTime.Now < DataStart)
+					return StareCursa.Planificata;
+
+				double ore = Distanta / 60.0;
+				DateTime dataFinal = DataStart.AddHours(ore);
+
+				if (DateTime.Now >= DataStart && DateTime.Now <= dataFinal)
+					return StareCursa.InDesfasurare;
+
+				return StareCursa.Finalizata;
+			}
+		}
 
 		[SetsRequiredMembers]
-		public Cursa(int distanta, MasinaModel masina, ConducatorModel conducator)
+		public Cursa(int distanta, MasinaModel masina, ConducatorModel conducator, DateTime dataStart)
 		{
 			Distanta = distanta;
 			Masina = masina;
 			Conducator = conducator;
-			Stare = StareCursa.Planificata;
+			DataStart = dataStart;
 		}
 
 		[SetsRequiredMembers]
-		private Cursa(Cursa sursa, int distanta, MasinaModel masina, ConducatorModel conducator)
+		private Cursa(Cursa sursa, int distanta, MasinaModel masina, ConducatorModel conducator, DateTime dataStart)
 		{
 			Id = sursa.Id;
 			Distanta = distanta;
 			Masina = masina;
 			Conducator = conducator;
-			Stare = sursa.Stare;
+			DataStart = dataStart;
 		}
 
-		public Cursa CreeazaCopieModificata(int distanta, MasinaModel masina, ConducatorModel conducator)
+		public Cursa CreeazaCopieModificata(int distanta, MasinaModel masina, ConducatorModel conducator, DateTime dataStart)
 		{
-			return new Cursa(this, distanta, masina, conducator);
+			return new Cursa(this, distanta, masina, conducator, dataStart);
 		}
 
 		public override bool Equals(object? obj)

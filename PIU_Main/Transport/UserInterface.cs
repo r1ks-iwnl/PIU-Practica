@@ -314,7 +314,7 @@ namespace Main
 			}
 			Console.WriteLine("Introdu distanta: ");
 			int.TryParse(Console.ReadLine(), out int distanta);
-			return new CursaModel(distanta, masina, conducator);
+			return new CursaModel(distanta, masina, conducator, DateTime.Now);
 		}
 
 		public static CursaModel? AfisareCurse(List<CursaModel> curse)

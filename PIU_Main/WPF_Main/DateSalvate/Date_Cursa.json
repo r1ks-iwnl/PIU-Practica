@@ -8,16 +8,19 @@
       "An": 2015,
       "Culoare": 2,
       "Optiuni": 0,
-      "DistParcursa": 0
+      "DistParcursa": 0,
+      "NumarInmatriculare": ""
     },
     "Conducator": {
       "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
       "Nume": "Cristian Matei",
       "DataNastere": "29-07-1989",
       "DataAngajare": "05-05-2015",
+      "DataExpirarePermis": "",
       "DistCondusa": 0
     },
-    "Stare": 0
+    "DataStart": "0001-01-01T00:00:00",
+    "Stare": 2
   },
   {
     "Id": "b5392cde-402c-409a-855d-6165ca42919e",
@@ -28,16 +31,19 @@
       "An": 2022,
       "Culoare": 2,
       "Optiuni": 9,
-      "DistParcursa": 0
+      "DistParcursa": 0,
+      "NumarInmatriculare": ""
     },
     "Conducator": {
       "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
       "Nume": "Cristian Matei",
       "DataNastere": "29-07-1989",
       "DataAngajare": "05-05-2015",
+      "DataExpirarePermis": "",
       "DistCondusa": 0
     },
-    "Stare": 0
+    "DataStart": "0001-01-01T00:00:00",
+    "Stare": 2
   },
   {
     "Id": "25afbf50-1de3-423f-b771-60ba90e6feb8",
@@ -48,16 +54,19 @@
       "An": 2021,
       "Culoare": 3,
       "Optiuni": 27,
-      "DistParcursa": 0
+      "DistParcursa": 0,
+      "NumarInmatriculare": ""
     },
     "Conducator": {
       "Id": "01f4d4d2-5778-47e7-a5bc-64149c09b655",
       "Nume": "Elena Dumitru",
       "DataNastere": "22-11-1992",
       "DataAngajare": "15-06-2018",
+      "DataExpirarePermis": "",
       "DistCondusa": 0
     },
-    "Stare": 0
+    "DataStart": "0001-01-01T00:00:00",
+    "Stare": 2
   },
   {
     "Id": "da5d03d9-98f9-4cea-affa-3c3bee63c08c",
@@ -68,15 +77,41 @@
       "An": 2023,
       "Culoare": 3,
       "Optiuni": 22,
-      "DistParcursa": 0
+      "DistParcursa": 0,
+      "NumarInmatriculare": ""
     },
     "Conducator": {
       "Id": "74dddd52-0d78-4bb5-a856-514d0127dfdf",
       "Nume": "Andrei Ionescu",
       "DataNastere": "03-01-1978",
       "DataAngajare": "15-06-2018",
+      "DataExpirarePermis": "",
       "DistCondusa": 0
     },
-    "Stare": 0
+    "DataStart": "0001-01-01T00:00:00",
+    "Stare": 2
+  },
+  {
+    "Id": "2446b7de-32fd-4ff6-95c9-e963544ab1b5",
+    "Distanta": 100,
+    "Masina": {
+      "Id": "ce271e17-bdc8-45af-8a42-8a69b3e1163b",
+      "Model": "Dacia Logan",
+      "An": 2022,
+      "Culoare": 2,
+      "Optiuni": 9,
+      "DistParcursa": 0,
+      "NumarInmatriculare": ""
+    },
+    "Conducator": {
+      "Id": "01f4d4d2-5778-47e7-a5bc-64149c09b655",
+      "Nume": "Elena Dumitru",
+      "DataNastere": "22-11-1992",
+      "DataAngajare": "15-06-2018",
+      "DataExpirarePermis": "",
+      "DistCondusa": 0
+    },
+    "DataStart": "0001-01-01T00:00:00",
+    "Stare": 2
   }
 ]

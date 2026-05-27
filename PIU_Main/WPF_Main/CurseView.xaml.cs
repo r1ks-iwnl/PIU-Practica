@@ -47,6 +47,20 @@ namespace WPF_Main
 				set => SetField(ref _conducatorSelectat, value, nameof(ConducatorSelectat));
 		}
 
+		private DateTime? _dataStart;
+		public DateTime? DataStart
+		{
+			get => _dataStart;
+			set => SetField(ref _dataStart, value, nameof(DataStart));
+		}
+
+		private string _oraStartText = "";
+		public string OraStartText
+		{
+			get => _oraStartText;
+			set => SetField(ref _oraStartText, value, nameof(OraStartText));
+		}
+
 			public override string this[string columnName]
 		{
 			get
@@ -65,11 +79,21 @@ namespace WPF_Main
 				{
 					if (ConducatorSelectat == null) return "Selectați un conducător.";
 				}
+				if (columnName == nameof(DataStart))
+				{
+					if (!DataStart.HasValue) return "Selectați data de început a cursei.";
+					if (DataStart.Value.Year < 2000) return "Introduceți o dată validă.";
+				}
+				if (columnName == nameof(OraStartText))
+				{
+					if (string.IsNullOrWhiteSpace(OraStartText)) return "Ora este obligatorie.";
+					if (!TimeSpan.TryParse(OraStartText, out _)) return "Ora trebuie să fie în format valid (ex. 14:30).";
+				}
 				return null;
 			}
 		}
 
-			public bool IsValid => AreValid(nameof(DistantaText), nameof(MasinaSelectata), nameof(ConducatorSelectat));
+			public bool IsValid => AreValid(nameof(DistantaText), nameof(MasinaSelectata), nameof(ConducatorSelectat), nameof(DataStart), nameof(OraStartText));
 	}
 
 	/// <summary>
@@ -130,14 +154,17 @@ namespace WPF_Main
 
 			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj("Vă rugăm să selectați entitățile și o distanță validă.", true);
+				AfiseazaMesaj(Draft.GetFirstError(nameof(Draft.MasinaSelectata), nameof(Draft.ConducatorSelectat), nameof(Draft.DistantaText), nameof(Draft.DataStart), nameof(Draft.OraStartText)) ?? "Vă rugăm să corectați erorile de pe formular.", true);
 				return;
 			}
 
 			try
 			{
 				int dist = int.Parse(Draft.DistantaText);
-				CursaModel nouaCursa = new CursaModel(dist, Draft.MasinaSelectata, Draft.ConducatorSelectat);
+				TimeSpan ora = TimeSpan.Parse(Draft.OraStartText);
+				DateTime startDateTime = Draft.DataStart.Value.Date + ora;
+
+				CursaModel nouaCursa = new CursaModel(dist, Draft.MasinaSelectata, Draft.ConducatorSelectat, startDateTime);
 				adminCurse.AdaugaElement(nouaCursa);
 				curseList.Add(nouaCursa);
 
@@ -146,6 +173,8 @@ namespace WPF_Main
 				Draft.DistantaText = string.Empty;
 				Draft.MasinaSelectata = null;
 				Draft.ConducatorSelectat = null;
+				Draft.DataStart = null;
+				Draft.OraStartText = string.Empty;
 			}
 			catch (Exception ex)
 			{
@@ -165,14 +194,17 @@ namespace WPF_Main
 
 			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj("Vă rugăm să selectați entitățile și o distanță validă.", true);
+				AfiseazaMesaj(Draft.GetFirstError(nameof(Draft.MasinaSelectata), nameof(Draft.ConducatorSelectat), nameof(Draft.DistantaText), nameof(Draft.DataStart), nameof(Draft.OraStartText)) ?? "Vă rugăm să corectați erorile de pe formular.", true);
 				return;
 			}
 
 			try
 			{
 				int dist = int.Parse(Draft.DistantaText);
-				CursaModel cursaModificata = cursaSelectata.CreeazaCopieModificata(dist, Draft.MasinaSelectata, Draft.ConducatorSelectat);
+				TimeSpan ora = TimeSpan.Parse(Draft.OraStartText);
+				DateTime startDateTime = Draft.DataStart.Value.Date + ora;
+
+				CursaModel cursaModificata = cursaSelectata.CreeazaCopieModificata(dist, Draft.MasinaSelectata, Draft.ConducatorSelectat, startDateTime);
 				adminCurse.ActualizeazaElement(cursaModificata);
 				IncarcaDate();
 				cursaSelectata = cursaModificata;
@@ -214,6 +246,8 @@ namespace WPF_Main
 				Draft.DistantaText = string.Empty;
 				Draft.MasinaSelectata = null;
 				Draft.ConducatorSelectat = null;
+				Draft.DataStart = null;
+				Draft.OraStartText = string.Empty;
 
 				AfiseazaMesaj("Cursa a fost ștearsă cu succes!", false);
 			}
@@ -234,6 +268,8 @@ namespace WPF_Main
 			Draft.DistantaText = cursaSelectata.Distanta.ToString();
 			Draft.MasinaSelectata = cursaSelectata.Masina;
 			Draft.ConducatorSelectat = cursaSelectata.Conducator;
+			Draft.DataStart = cursaSelectata.DataStart;
+			Draft.OraStartText = cursaSelectata.DataStart.ToString("HH:mm");
 		}
 
 		private void AfiseazaMesaj(string mesaj, bool esteEroare)

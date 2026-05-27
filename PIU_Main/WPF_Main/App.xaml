@@ -228,7 +228,11 @@
                                     </ControlTemplate>
                                 </ToggleButton.Template>
                             </ToggleButton>
-                            <ContentPresenter x:Name="ContentSite" IsHitTestVisible="False" Content="{TemplateBinding SelectionBoxItem}" Margin="6,4,24,4" VerticalAlignment="Center" />
+                            <ContentPresenter x:Name="ContentSite" IsHitTestVisible="False" 
+                                              Content="{TemplateBinding SelectionBoxItem}" 
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                                              Margin="6,4,24,4" VerticalAlignment="Center" />
                             <Popup x:Name="PART_Popup"
                                    Placement="Bottom"
                                    AllowsTransparency="True"
