@@ -5,7 +5,8 @@
     "An": 2022,
     "Culoare": 2,
     "Optiuni": 9,
-    "DistParcursa": 0
+    "DistParcursa": 0,
+    "NumarInmatriculare": ""
   },
   {
     "Id": "37892af5-b96b-4322-8c3a-3d3ec0723e24",
@@ -13,7 +14,8 @@
     "An": 2023,
     "Culoare": 3,
     "Optiuni": 22,
-    "DistParcursa": 0
+    "DistParcursa": 0,
+    "NumarInmatriculare": ""
   },
   {
     "Id": "694f35f9-5db4-4e95-8456-c8e5faffab8b",
@@ -21,7 +23,8 @@
     "An": 2018,
     "Culoare": 1,
     "Optiuni": 5,
-    "DistParcursa": 0
+    "DistParcursa": 0,
+    "NumarInmatriculare": ""
   },
   {
     "Id": "a6b33e38-ec00-4b45-b4bd-60902fce55b4",
@@ -29,7 +32,8 @@
     "An": 2021,
     "Culoare": 3,
     "Optiuni": 27,
-    "DistParcursa": 0
+    "DistParcursa": 0,
+    "NumarInmatriculare": ""
   },
   {
     "Id": "c383fdd9-d0a5-424f-a3eb-a8449c2772ca",
@@ -37,6 +41,7 @@
     "An": 2015,
     "Culoare": 2,
     "Optiuni": 0,
-    "DistParcursa": 0
+    "DistParcursa": 0,
+    "NumarInmatriculare": ""
   }
 ]

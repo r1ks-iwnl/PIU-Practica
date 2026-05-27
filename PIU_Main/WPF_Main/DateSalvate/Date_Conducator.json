@@ -4,6 +4,7 @@
     "Nume": "Elena Dumitru",
     "DataNastere": "22-11-1992",
     "DataAngajare": "15-06-2018",
+    "DataExpirarePermis": "",
     "DistCondusa": 0
   },
   {
@@ -11,6 +12,7 @@
     "Nume": "Andrei Ionescu",
     "DataNastere": "03-01-1978",
     "DataAngajare": "15-06-2018",
+    "DataExpirarePermis": "",
     "DistCondusa": 0
   },
   {
@@ -18,6 +20,7 @@
     "Nume": "Maria Vasilescu",
     "DataNastere": "12-08-1995",
     "DataAngajare": "10-10-2021",
+    "DataExpirarePermis": "",
     "DistCondusa": 0
   }
 ]

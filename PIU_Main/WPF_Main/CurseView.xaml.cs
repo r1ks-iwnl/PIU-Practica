@@ -196,13 +196,10 @@ namespace WPF_Main
 				return;
 			}
 
-			MessageBoxResult confirmare = MessageBox.Show(
-				$"Sigur doriți să ștergeți cursa pentru mașina '{cursaSelectata.Masina?.Model}'?",
-				"Confirmare ștergere",
-				MessageBoxButton.YesNo,
-				MessageBoxImage.Warning);
+			CustomDialog confirmDialog = new CustomDialog($"Sigur doriți să ștergeți cursa pentru mașina '{cursaSelectata.Masina?.Model}'?");
+			confirmDialog.Owner = Window.GetWindow(this);
 
-			if (confirmare != MessageBoxResult.Yes)
+			if (confirmDialog.ShowDialog() != true)
 			{
 				return;
 			}
@@ -242,7 +239,7 @@ namespace WPF_Main
 		private void AfiseazaMesaj(string mesaj, bool esteEroare)
 		{
 			MesajStatus.Text = mesaj;
-			MesajStatus.Foreground = esteEroare ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.LightGreen);
+			MesajStatus.Foreground = esteEroare ? (SolidColorBrush)FindResource("MDNError") : new SolidColorBrush(Colors.LightGreen);
 			MesajStatus.Visibility = Visibility.Visible;
 		}
 	}

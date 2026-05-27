@@ -76,7 +76,7 @@ namespace WPF_Main
 		public MasiniView()
 		{
 			InitializeComponent();
-			Nume.DataContext = Draft;
+			DataContext = Draft;
 
 			int anCurrent = DateTime.Now.Year;
 			for (int an = anCurrent; an >= 1970; an--)
@@ -212,13 +212,10 @@ namespace WPF_Main
 				return;
 			}
 
-			MessageBoxResult confirmare = MessageBox.Show(
-				$"Sigur doriți să ștergeți mașina '{masinaSelectata.Model}'?",
-				"Confirmare ștergere",
-				MessageBoxButton.YesNo,
-				MessageBoxImage.Warning);
+			CustomDialog confirmDialog = new CustomDialog($"Sigur doriți să ștergeți mașina '{masinaSelectata.Model}'?");
+			confirmDialog.Owner = Window.GetWindow(this);
 
-			if (confirmare != MessageBoxResult.Yes)
+			if (confirmDialog.ShowDialog() != true)
 			{
 				return;
 			}
@@ -302,7 +299,7 @@ namespace WPF_Main
 		private void AfiseazaMesaj(string mesaj, bool esteEroare)
 		{
 			MesajStatus.Text = mesaj;
-			MesajStatus.Foreground = esteEroare ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.LightGreen);
+			MesajStatus.Foreground = esteEroare ? (SolidColorBrush)FindResource("MDNError") : new SolidColorBrush(Colors.LightGreen);
 			MesajStatus.Visibility = Visibility.Visible;
 		}
 	}

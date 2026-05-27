@@ -12,14 +12,42 @@
 		<ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
 			<StackPanel Margin="10,10,20,10">
 				<TextBlock Text="Nume:" Foreground="White" HorizontalAlignment="Left" Margin="0,0,0,2"/>
-				<TextBox x:Name="tbNume" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"
-						 Text="{Binding NumeText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-						 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				<Grid>
+					<TextBox x:Name="tbNume" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"
+							 Text="{Binding NumeText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+							 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+					<TextBlock Text="Ex. Popescu" Foreground="DarkGray" Margin="7,0,0,0" IsHitTestVisible="False" VerticalAlignment="Center">
+						<TextBlock.Style>
+							<Style TargetType="TextBlock">
+								<Setter Property="Visibility" Value="Collapsed"/>
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding Text, ElementName=tbNume}" Value="">
+										<Setter Property="Visibility" Value="Visible"/>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</TextBlock.Style>
+					</TextBlock>
+				</Grid>
 
 				<TextBlock Text="Prenume:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
-				<TextBox x:Name="tbPrenume" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"
-						 Text="{Binding PrenumeText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-						 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				<Grid>
+					<TextBox x:Name="tbPrenume" HorizontalAlignment="Stretch" MinHeight="22" Padding="2"
+							 Text="{Binding PrenumeText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+							 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+					<TextBlock Text="Ex. Ion" Foreground="DarkGray" Margin="7,0,0,0" IsHitTestVisible="False" VerticalAlignment="Center">
+						<TextBlock.Style>
+							<Style TargetType="TextBlock">
+								<Setter Property="Visibility" Value="Collapsed"/>
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding Text, ElementName=tbPrenume}" Value="">
+										<Setter Property="Visibility" Value="Visible"/>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</TextBlock.Style>
+					</TextBlock>
+				</Grid>
 
 				<TextBlock Text="Data Naștere:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
 				<DatePicker x:Name="pickDataNastere" HorizontalAlignment="Stretch" MinHeight="24"
@@ -55,16 +83,32 @@
 				<TextBox x:Name="tbCautareNume" Width="200" TextChanged="tbCautareNume_TextChanged"/>
 			</StackPanel>
 
-				<DataGrid Grid.Row="1" x:Name="ConducatoriDataGrid" 
+			<Grid Grid.Row="1">
+				<DataGrid x:Name="ConducatoriDataGrid" GridLinesVisibility="Horizontal"
 					  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" SelectionChanged="ConducatoriDataGrid_SelectionChanged">
-				<DataGrid.Columns>
-					<DataGridTextColumn Header="Nume" Binding="{Binding Nume}" />
-					<DataGridTextColumn Header="Data Angajare" Binding="{Binding DataAngajare}" />
-					<DataGridTextColumn Header="Data expirare permis" Binding="{Binding DataExpirarePermis}" />
-					<DataGridTextColumn Header="Data Naștere" Binding="{Binding DataNastere}" />
-					<DataGridTextColumn Header="Mașini" Binding="{Binding MasiniConduseDisplay}" />
-				</DataGrid.Columns>
-			</DataGrid>
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="Nume" Binding="{Binding Nume}" />
+						<DataGridTextColumn Header="Data Angajare" Binding="{Binding DataAngajare}" />
+						<DataGridTextColumn Header="Data expirare permis" Binding="{Binding DataExpirarePermis}" />
+						<DataGridTextColumn Header="Data Naștere" Binding="{Binding DataNastere}" />
+						<DataGridTextColumn Header="Mașini" Binding="{Binding MasiniConduseDisplay}" />
+					</DataGrid.Columns>
+				</DataGrid>
+
+				<!-- Empty State Message -->
+				<TextBlock Text="Nu a fost găsit niciun conducător." HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" FontSize="16" IsHitTestVisible="False">
+					<TextBlock.Style>
+						<Style TargetType="TextBlock">
+							<Setter Property="Visibility" Value="Collapsed"/>
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding Items.Count, ElementName=ConducatoriDataGrid}" Value="0">
+									<Setter Property="Visibility" Value="Visible"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+			</Grid>
 		</Grid>
 	</Grid>
 </UserControl>

@@ -53,6 +53,13 @@ namespace WPF_Main
 			set { _dataAngajare = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(DataAngajare))); }
 		}
 
+		private DateTime? _dataExpirarePermis;
+		public DateTime? DataExpirarePermis
+		{
+			get => _dataExpirarePermis;
+			set { _dataExpirarePermis = value; PropertyChanged?.Invoke(this, new ComponentModel.PropertyChangedEventArgs(nameof(DataExpirarePermis))); }
+		}
+
 		public string Error => null;
 
 		public string this[string columnName]
@@ -89,15 +96,20 @@ namespace WPF_Main
 							return $"Angajarea necesită împlinirea vârstei de {VARSTA_MINIMA} ani (la data de {DataNastere.Value.AddYears(VARSTA_MINIMA):d}).";
 					}
 				}
+				if (columnName == nameof(DataExpirarePermis))
+				{
+					if (!DataExpirarePermis.HasValue) return "Selectați data de expirare a permisului.";
+					if (DataExpirarePermis.Value < DateTime.Today) return "Permisul este expirat.";
+				}
 				return null;
 			}
 		}
 
-		public bool IsValid => string.IsNullOrEmpty(this[nameof(NumeText)]) && string.IsNullOrEmpty(this[nameof(PrenumeText)]) && string.IsNullOrEmpty(this[nameof(DataNastere)]) && string.IsNullOrEmpty(this[nameof(DataAngajare)]);
+		public bool IsValid => string.IsNullOrEmpty(this[nameof(NumeText)]) && string.IsNullOrEmpty(this[nameof(PrenumeText)]) && string.IsNullOrEmpty(this[nameof(DataNastere)]) && string.IsNullOrEmpty(this[nameof(DataAngajare)]) && string.IsNullOrEmpty(this[nameof(DataExpirarePermis)]);
 
 		public string? ObtinePrimulMesajEroare()
 		{
-			string[] campuri = { nameof(NumeText), nameof(PrenumeText), nameof(DataNastere), nameof(DataAngajare) };
+			string[] campuri = { nameof(NumeText), nameof(PrenumeText), nameof(DataNastere), nameof(DataAngajare), nameof(DataExpirarePermis) };
 			foreach (string camp in campuri)
 			{
 				string mesaj = this[camp];
@@ -175,8 +187,9 @@ namespace WPF_Main
 				string numeComplet = $"{Draft.NumeText.Trim()} {Draft.PrenumeText.Trim()}";
 				string dataNastere = Draft.DataNastere?.ToString("d") ?? string.Empty;
 				string dataAngajare = Draft.DataAngajare?.ToString("d") ?? string.Empty;
+				string dataExpirarePermis = Draft.DataExpirarePermis?.ToString("d") ?? string.Empty;
 
-				ConducatorModel nouConducator = new ConducatorModel(numeComplet, dataNastere, dataAngajare);
+				ConducatorModel nouConducator = new ConducatorModel(numeComplet, dataNastere, dataAngajare, dataExpirarePermis);
 				adminConducatori.AdaugaElement(nouConducator);
 
 				IncarcaDate();
@@ -187,6 +200,7 @@ namespace WPF_Main
 				Draft.PrenumeText = string.Empty;
 				Draft.DataNastere = null;
 				Draft.DataAngajare = null;
+				Draft.DataExpirarePermis = null;
 			}
 			catch (Exception ex)
 			{
@@ -215,8 +229,9 @@ namespace WPF_Main
 				string numeComplet = $"{Draft.NumeText.Trim()} {Draft.PrenumeText.Trim()}";
 				string dataNastere = Draft.DataNastere?.ToString("d") ?? string.Empty;
 				string dataAngajare = Draft.DataAngajare?.ToString("d") ?? string.Empty;
+				string dataExpirarePermis = Draft.DataExpirarePermis?.ToString("d") ?? string.Empty;
 
-				ConducatorModel conducatorModificat = conducatorSelectat.CreeazaCopieModificata(numeComplet, dataNastere, dataAngajare);
+				ConducatorModel conducatorModificat = conducatorSelectat.CreeazaCopieModificata(numeComplet, dataNastere, dataAngajare, dataExpirarePermis);
 				adminConducatori.ActualizeazaElement(conducatorModificat);
 				IncarcaDate();
 				conducatorSelectat = conducatorModificat;
@@ -247,13 +262,10 @@ namespace WPF_Main
 				return;
 			}
 
-			MessageBoxResult confirmare = MessageBox.Show(
-				$"Sigur doriți să ștergeți conducătorul '{conducatorSelectat.Nume}'?",
-				"Confirmare ștergere",
-				MessageBoxButton.YesNo,
-				MessageBoxImage.Warning);
+			CustomDialog confirmDialog = new CustomDialog($"Sigur doriți să ștergeți conducătorul '{conducatorSelectat.Nume}'?");
+			confirmDialog.Owner = Window.GetWindow(this);
 
-			if (confirmare != MessageBoxResult.Yes)
+			if (confirmDialog.ShowDialog() != true)
 			{
 				return;
 			}
@@ -269,6 +281,7 @@ namespace WPF_Main
 				Draft.PrenumeText = string.Empty;
 				Draft.DataNastere = null;
 				Draft.DataAngajare = null;
+				Draft.DataExpirarePermis = null;
 
 				AfiseazaMesaj("Conducătorul a fost șters cu succes!", false);
 			}
@@ -291,6 +304,7 @@ namespace WPF_Main
 			Draft.PrenumeText = prenume;
 			Draft.DataNastere = ParseDate(conducatorSelectat.DataNastere);
 			Draft.DataAngajare = ParseDate(conducatorSelectat.DataAngajare);
+			Draft.DataExpirarePermis = ParseDate(conducatorSelectat.DataExpirarePermis);
 		}
 
 		private static (string Nume, string Prenume) DesparteNume(string numeComplet)
@@ -322,7 +336,7 @@ namespace WPF_Main
 		private void AfiseazaMesaj(string mesaj, bool esteEroare)
 		{
 			tbMesajStatus.Text = mesaj;
-			tbMesajStatus.Foreground = esteEroare ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.LightGreen);
+			tbMesajStatus.Foreground = esteEroare ? (SolidColorBrush)FindResource("MDNError") : new SolidColorBrush(Colors.LightGreen);
 			tbMesajStatus.Visibility = Visibility.Visible;
 		}
 	}

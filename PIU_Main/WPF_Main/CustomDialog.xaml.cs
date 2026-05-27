@@ -1,0 +1,30 @@
+using System;
+using System.Windows;
+
+namespace WPF_Main
+{
+    public partial class CustomDialog : Window
+    {
+        public bool Result { get; private set; }
+
+        public CustomDialog(string message)
+        {
+            InitializeComponent();
+            MessageText.Text = message;
+        }
+
+        private void BtnYes_Click(object sender, RoutedEventArgs e)
+        {
+            Result = true;
+            DialogResult = true;
+            Close();
+        }
+
+        private void BtnNo_Click(object sender, RoutedEventArgs e)
+        {
+            Result = false;
+            DialogResult = false;
+            Close();
+        }
+    }
+}
