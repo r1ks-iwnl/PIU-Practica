@@ -6,13 +6,22 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>garage-svgrepo-com.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="garage-svgrepo-com.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AdministrareDate\AdministrareDate.csproj" />
     <ProjectReference Include="..\Conducator\Conducator.csproj" />
     <ProjectReference Include="..\Cursa\Cursa.csproj" />
     <ProjectReference Include="..\Masina\Masina.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="garage-svgrepo-com.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,7 +6,7 @@
     "Culoare": 2,
     "Optiuni": 9,
     "DistParcursa": 0,
-    "NumarInmatriculare": ""
+    "NumarInmatriculare": "B 221 LOG"
   },
   {
     "Id": "37892af5-b96b-4322-8c3a-3d3ec0723e24",
@@ -15,7 +15,7 @@
     "Culoare": 3,
     "Optiuni": 22,
     "DistParcursa": 0,
-    "NumarInmatriculare": ""
+    "NumarInmatriculare": "SV 83 TSLA"
   },
   {
     "Id": "694f35f9-5db4-4e95-8456-c8e5faffab8b",
@@ -24,7 +24,7 @@
     "Culoare": 1,
     "Optiuni": 5,
     "DistParcursa": 0,
-    "NumarInmatriculare": ""
+    "NumarInmatriculare": "CJ 18 WGO"
   },
   {
     "Id": "a6b33e38-ec00-4b45-b4bd-60902fce55b4",
@@ -33,7 +33,7 @@
     "Culoare": 3,
     "Optiuni": 27,
     "DistParcursa": 0,
-    "NumarInmatriculare": ""
+    "NumarInmatriculare": "TM 44 BMW"
   },
   {
     "Id": "c383fdd9-d0a5-424f-a3eb-a8449c2772ca",
@@ -42,6 +42,6 @@
     "Culoare": 2,
     "Optiuni": 0,
     "DistParcursa": 0,
-    "NumarInmatriculare": ""
+    "NumarInmatriculare": "IS 95 RNL"
   }
 ]

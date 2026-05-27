@@ -9,12 +9,12 @@
 
 		<ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
 			<StackPanel Margin="10,10,20,10">
-				<TextBlock Text="Masina:" Foreground="White" HorizontalAlignment="Left" Margin="0,0,0,2"/>
+				<TextBlock Text="Mașină:" Foreground="White" HorizontalAlignment="Left" Margin="0,0,0,2"/>
 				<ComboBox x:Name="cmbMasina" HorizontalAlignment="Stretch" MinHeight="22" Padding="2" DisplayMemberPath="Model"
 						  SelectedItem="{Binding MasinaSelectata, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
 
-				<TextBlock Text="Conducator:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
+				<TextBlock Text="Conducător:" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,2"/>
 				<ComboBox x:Name="cmbConducator" HorizontalAlignment="Stretch" MinHeight="22" Padding="2" DisplayMemberPath="Nume"
 						  SelectedItem="{Binding ConducatorSelectat, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>

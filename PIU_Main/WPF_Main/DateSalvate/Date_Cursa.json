@@ -1,51 +1,5 @@
 [
   {
-    "Id": "cf270df8-0ff0-49aa-ba9c-97be2871bf6c",
-    "Distanta": 27,
-    "Masina": {
-      "Id": "c383fdd9-d0a5-424f-a3eb-a8449c2772ca",
-      "Model": "Renault Clio",
-      "An": 2015,
-      "Culoare": 2,
-      "Optiuni": 0,
-      "DistParcursa": 0,
-      "NumarInmatriculare": ""
-    },
-    "Conducator": {
-      "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
-      "Nume": "Cristian Matei",
-      "DataNastere": "29-07-1989",
-      "DataAngajare": "05-05-2015",
-      "DataExpirarePermis": "",
-      "DistCondusa": 0
-    },
-    "DataStart": "0001-01-01T00:00:00",
-    "Stare": 2
-  },
-  {
-    "Id": "b5392cde-402c-409a-855d-6165ca42919e",
-    "Distanta": 50,
-    "Masina": {
-      "Id": "ce271e17-bdc8-45af-8a42-8a69b3e1163b",
-      "Model": "Dacia Logan",
-      "An": 2022,
-      "Culoare": 2,
-      "Optiuni": 9,
-      "DistParcursa": 0,
-      "NumarInmatriculare": ""
-    },
-    "Conducator": {
-      "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
-      "Nume": "Cristian Matei",
-      "DataNastere": "29-07-1989",
-      "DataAngajare": "05-05-2015",
-      "DataExpirarePermis": "",
-      "DistCondusa": 0
-    },
-    "DataStart": "0001-01-01T00:00:00",
-    "Stare": 2
-  },
-  {
     "Id": "25afbf50-1de3-423f-b771-60ba90e6feb8",
     "Distanta": 44,
     "Masina": {
@@ -65,7 +19,7 @@
       "DataExpirarePermis": "",
       "DistCondusa": 0
     },
-    "DataStart": "0001-01-01T00:00:00",
+    "DataStart": "2026-05-27T17:00:00",
     "Stare": 2
   },
   {
@@ -88,8 +42,8 @@
       "DataExpirarePermis": "",
       "DistCondusa": 0
     },
-    "DataStart": "0001-01-01T00:00:00",
-    "Stare": 2
+    "DataStart": "2026-05-27T14:12:00",
+    "Stare": 1
   },
   {
     "Id": "2446b7de-32fd-4ff6-95c9-e963544ab1b5",
@@ -111,7 +65,7 @@
       "DataExpirarePermis": "",
       "DistCondusa": 0
     },
-    "DataStart": "0001-01-01T00:00:00",
-    "Stare": 2
+    "DataStart": "2026-05-27T19:30:00",
+    "Stare": 1
   }
 ]

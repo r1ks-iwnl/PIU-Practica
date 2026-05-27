@@ -2,25 +2,25 @@
   {
     "Id": "01f4d4d2-5778-47e7-a5bc-64149c09b655",
     "Nume": "Elena Dumitru",
-    "DataNastere": "22-11-1992",
-    "DataAngajare": "15-06-2018",
-    "DataExpirarePermis": "",
+    "DataNastere": "22/11/1992",
+    "DataAngajare": "15/06/2018",
+    "DataExpirarePermis": "21/06/2028",
     "DistCondusa": 0
   },
   {
     "Id": "74dddd52-0d78-4bb5-a856-514d0127dfdf",
     "Nume": "Andrei Ionescu",
-    "DataNastere": "03-01-1978",
-    "DataAngajare": "15-06-2018",
-    "DataExpirarePermis": "",
+    "DataNastere": "03/01/1978",
+    "DataAngajare": "15/06/2018",
+    "DataExpirarePermis": "14/10/2027",
     "DistCondusa": 0
   },
   {
     "Id": "9712ab04-6cf2-49a6-813b-6b2d0bf5d722",
     "Nume": "Maria Vasilescu",
-    "DataNastere": "12-08-1995",
-    "DataAngajare": "10-10-2021",
-    "DataExpirarePermis": "",
+    "DataNastere": "12/08/1995",
+    "DataAngajare": "10/10/2021",
+    "DataExpirarePermis": "18/07/2030",
     "DistCondusa": 0
   }
 ]

@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Main"
         mc:Ignorable="d"
-        Title="Transport" Height="600" Width="900" Background="#393473">
+        Title="Transport" Height="600" Width="900" Background="#393473"
+		Icon="/garage-svgrepo-com.ico">
+		
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<!-- Left column for the menu -->
@@ -17,12 +19,12 @@
 		<StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="15,10">
 			<Button x:Name="btnConducator"
 				Style="{StaticResource MDN}"
-				Content="Conducatori"
+				Content="Conducători"
 				Margin="0, 0, 0, 20"
                 Click="btnConducator_Click"/>
             <Button x:Name="btnMasina"
 					Style="{StaticResource MDN}"
-					Content="Masini"
+					Content="Mașini"
 					Margin="0, 0, 0, 20"
                     Click="btnMasina_Click"/>
             <Button x:Name="btnCursa"

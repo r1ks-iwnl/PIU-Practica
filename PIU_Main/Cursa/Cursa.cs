@@ -27,7 +27,7 @@ namespace Cursa
 				if (DateTime.Now < DataStart)
 					return StareCursa.Planificata;
 
-				double ore = Distanta / 60.0;
+				double ore = Distanta / 25.0;
 				DateTime dataFinal = DataStart.AddHours(ore);
 
 				if (DateTime.Now >= DataStart && DateTime.Now <= dataFinal)
