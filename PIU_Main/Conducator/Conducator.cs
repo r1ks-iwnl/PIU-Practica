@@ -9,7 +9,6 @@ namespace Conducator
 		public required string DataNastere { get; init; }
 		public required string DataAngajare { get; init; }
 		public string DataExpirarePermis { get; init; } = string.Empty;
-		private readonly List<string> _masiniConduse = new();
 		public int DistCondusa { get; }
 
 		[SetsRequiredMembers]
@@ -21,11 +20,6 @@ namespace Conducator
 			DataExpirarePermis = dataExpirarePermis;
 		}
 
-		public void MasinaNoua(string modelMasina)
-		{
-			_masiniConduse.Add(modelMasina);
-		}
-
 		public Conducator CreeazaCopieModificata(string nume, string dataNastere, string dataAngajare, string? dataExpirarePermis = null)
 		{
 			string dataExp = dataExpirarePermis ?? DataExpirarePermis;
@@ -33,15 +27,7 @@ namespace Conducator
 			{
 				Id = Id
 			};
-			conducatorModificat._masiniConduse.AddRange(_masiniConduse);
 			return conducatorModificat;
-		}
-
-		public string MasiniConduseDisplay()
-		{
-			if (_masiniConduse == null || !_masiniConduse.Any())
-				return "Niciuna";
-			return string.Join(", ", _masiniConduse);
 		}
 
 		public override bool Equals(object? obj)
