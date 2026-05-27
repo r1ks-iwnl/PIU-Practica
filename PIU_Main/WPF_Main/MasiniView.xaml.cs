@@ -119,7 +119,7 @@ namespace WPF_Main
 			// Validarea e bazata pe obiectul Draft si DataBindings
 			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj("Vă rugăm să introduceți corect datele modelului.", true);
+				AfiseazaMesaj(Draft.GetFirstError(nameof(Draft.ModelText), nameof(Draft.NumarInmatriculareText)) ?? "Vă rugăm să introduceți corect datele modelului.", true);
 				return;
 			}
 
@@ -169,7 +169,7 @@ namespace WPF_Main
 
 			if (!Draft.IsValid)
 			{
-				AfiseazaMesaj("Vă rugăm să introduceți corect datele modelului.", true);
+				AfiseazaMesaj(Draft.GetFirstError(nameof(Draft.ModelText), nameof(Draft.NumarInmatriculareText)) ?? "Vă rugăm să introduceți corect datele modelului.", true);
 				return;
 			}
 
