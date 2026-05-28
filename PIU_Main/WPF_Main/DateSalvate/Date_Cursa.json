@@ -61,5 +61,47 @@
     },
     "DataStart": "2026-05-28T08:00:00",
     "Stare": 2
+  },
+  {
+    "Id": "f6834107-db6f-40e4-a4d0-2c1b9d52aa9c",
+    "Distanta": 200,
+    "Masina": {
+      "Id": "c383fdd9-d0a5-424f-a3eb-a8449c2772ca",
+      "Model": "Renault Clio",
+      "An": 2015,
+      "Culoare": 2,
+      "Optiuni": 0,
+      "NumarInmatriculare": "IS 95 RNL"
+    },
+    "Conducator": {
+      "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
+      "Nume": "Cristian Matei",
+      "DataNastere": "29/07/1989",
+      "DataAngajare": "05/05/2015",
+      "DataExpirarePermis": "17/08/2029"
+    },
+    "DataStart": "2026-05-14T12:30:00",
+    "Stare": 2
+  },
+  {
+    "Id": "c04425ee-8152-4f62-8ca0-0ff410fb34eb",
+    "Distanta": 250,
+    "Masina": {
+      "Id": "694f35f9-5db4-4e95-8456-c8e5faffab8b",
+      "Model": "VW Golf",
+      "An": 2018,
+      "Culoare": 1,
+      "Optiuni": 5,
+      "NumarInmatriculare": "CJ 18 WGO"
+    },
+    "Conducator": {
+      "Id": "16080a76-c05e-4f1f-a77a-1abc092be896",
+      "Nume": "Popescu Radu",
+      "DataNastere": "14/06/1984",
+      "DataAngajare": "01/02/2020",
+      "DataExpirarePermis": "12/05/2031"
+    },
+    "DataStart": "2026-09-11T12:00:00",
+    "Stare": 0
   }
 ]

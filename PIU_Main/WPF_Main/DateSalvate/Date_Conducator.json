@@ -4,23 +4,34 @@
     "Nume": "Elena Dumitru",
     "DataNastere": "22/11/1992",
     "DataAngajare": "15/06/2018",
-    "DataExpirarePermis": "21/06/2028",
-    "DistCondusa": 0
+    "DataExpirarePermis": "21/06/2028"
   },
   {
     "Id": "74dddd52-0d78-4bb5-a856-514d0127dfdf",
     "Nume": "Andrei Ionescu",
     "DataNastere": "03/01/1978",
     "DataAngajare": "15/06/2018",
-    "DataExpirarePermis": "14/10/2027",
-    "DistCondusa": 0
+    "DataExpirarePermis": "14/10/2027"
   },
   {
     "Id": "9712ab04-6cf2-49a6-813b-6b2d0bf5d722",
     "Nume": "Maria Vasilescu",
     "DataNastere": "12/08/1995",
     "DataAngajare": "10/10/2021",
-    "DataExpirarePermis": "18/07/2030",
-    "DistCondusa": 0
+    "DataExpirarePermis": "18/07/2030"
+  },
+  {
+    "Id": "815bc049-1632-4043-86db-84895f4b2c3d",
+    "Nume": "Cristian Matei",
+    "DataNastere": "29/07/1989",
+    "DataAngajare": "05/05/2015",
+    "DataExpirarePermis": "17/08/2029"
+  },
+  {
+    "Id": "16080a76-c05e-4f1f-a77a-1abc092be896",
+    "Nume": "Popescu Radu",
+    "DataNastere": "14/06/1984",
+    "DataAngajare": "01/02/2020",
+    "DataExpirarePermis": "12/05/2031"
   }
 ]
