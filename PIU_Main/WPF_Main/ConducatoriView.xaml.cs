@@ -130,6 +130,18 @@ namespace WPF_Main
 		{
 			// Incarca datele prin Factory
 			var dateExistente = adminConducatori.ObtineToateElementele();
+			var curseExistente = adminCurse.ObtineToateElementele() ?? new List<CursaModel>();
+
+			if (dateExistente != null)
+			{
+				foreach (var cond in dateExistente)
+				{
+					cond.DistCondusa = curseExistente
+						.Where(c => c.Conducator?.Id == cond.Id && c.Stare == Cursa.StareCursa.Finalizata)
+						.Sum(c => c.Distanta);
+				}
+			}
+
 			conducatoriList = new ObservableCollection<ConducatorModel>(dateExistente ?? new List<ConducatorModel>());
 
 			// Ataseaza lista la datagrid

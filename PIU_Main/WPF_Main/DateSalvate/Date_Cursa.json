@@ -8,7 +8,6 @@
       "An": 2021,
       "Culoare": 3,
       "Optiuni": 27,
-      "DistParcursa": 0,
       "NumarInmatriculare": ""
     },
     "Conducator": {
@@ -16,8 +15,7 @@
       "Nume": "Elena Dumitru",
       "DataNastere": "22-11-1992",
       "DataAngajare": "15-06-2018",
-      "DataExpirarePermis": "",
-      "DistCondusa": 0
+      "DataExpirarePermis": ""
     },
     "DataStart": "2026-05-27T17:00:00",
     "Stare": 2
@@ -31,7 +29,6 @@
       "An": 2023,
       "Culoare": 3,
       "Optiuni": 22,
-      "DistParcursa": 0,
       "NumarInmatriculare": ""
     },
     "Conducator": {
@@ -39,11 +36,10 @@
       "Nume": "Andrei Ionescu",
       "DataNastere": "03-01-1978",
       "DataAngajare": "15-06-2018",
-      "DataExpirarePermis": "",
-      "DistCondusa": 0
+      "DataExpirarePermis": ""
     },
     "DataStart": "2026-05-27T14:12:00",
-    "Stare": 1
+    "Stare": 2
   },
   {
     "Id": "2446b7de-32fd-4ff6-95c9-e963544ab1b5",
@@ -54,7 +50,6 @@
       "An": 2022,
       "Culoare": 2,
       "Optiuni": 9,
-      "DistParcursa": 0,
       "NumarInmatriculare": ""
     },
     "Conducator": {
@@ -62,10 +57,9 @@
       "Nume": "Elena Dumitru",
       "DataNastere": "22-11-1992",
       "DataAngajare": "15-06-2018",
-      "DataExpirarePermis": "",
-      "DistCondusa": 0
+      "DataExpirarePermis": ""
     },
-    "DataStart": "2026-05-27T19:30:00",
-    "Stare": 1
+    "DataStart": "2026-05-28T08:00:00",
+    "Stare": 2
   }
 ]

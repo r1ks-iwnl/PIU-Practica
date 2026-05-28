@@ -91,6 +91,7 @@
 						<DataGridTextColumn Header="Data Angajare" Binding="{Binding DataAngajare}" />
 						<DataGridTextColumn Header="Data expirare permis" Binding="{Binding DataExpirarePermis}" />
 						<DataGridTextColumn Header="Data Naștere" Binding="{Binding DataNastere}" />
+						<DataGridTextColumn Header="Distanță Parcursă" Binding="{Binding DistCondusa}" />
 					</DataGrid.Columns>
 				</DataGrid>
 

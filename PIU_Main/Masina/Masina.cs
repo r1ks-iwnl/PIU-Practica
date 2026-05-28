@@ -28,7 +28,8 @@ namespace Masina
 		public required int An { get; init; }
 		public CuloareMasina Culoare { get; init; }
 		public OptiuniMasina Optiuni { get; init; }
-		public int DistParcursa { get; }
+		[System.Text.Json.Serialization.JsonIgnore]
+		public int DistParcursa { get; set; }
 		public string NumarInmatriculare { get; init; } = string.Empty;
 		private readonly List<ConducatorModel> _condDisp = new();
 

@@ -91,6 +91,18 @@ namespace WPF_Main
 		private void IncarcaDate()
 		{
 			var dateExistente = adminMasini.ObtineToateElementele();
+			var curseExistente = adminCurse.ObtineToateElementele() ?? new List<CursaModel>();
+
+			if (dateExistente != null)
+			{
+				foreach (var masina in dateExistente)
+				{
+					masina.DistParcursa = curseExistente
+						.Where(c => c.Masina?.Id == masina.Id && c.Stare == Cursa.StareCursa.Finalizata)
+						.Sum(c => c.Distanta);
+				}
+			}
+
 			masiniList = new ObservableCollection<MasinaModel>(dateExistente ?? new List<MasinaModel>());
 			MasiniDataGrid.ItemsSource = masiniList;
 

@@ -9,7 +9,8 @@ namespace Conducator
 		public required string DataNastere { get; init; }
 		public required string DataAngajare { get; init; }
 		public string DataExpirarePermis { get; init; } = string.Empty;
-		public int DistCondusa { get; }
+		[System.Text.Json.Serialization.JsonIgnore]
+		public int DistCondusa { get; set; }
 
 		[SetsRequiredMembers]
 		public Conducator(string nume, string dataNastere, string dataAngajare, string dataExpirarePermis = "")
