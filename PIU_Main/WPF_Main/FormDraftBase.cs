@@ -7,11 +7,11 @@ namespace WPF_Main
 {
 	public abstract class FormDraftBase : INotifyPropertyChanged, IDataErrorInfo
 	{
-		public virtual string Error => null;
+		public virtual string Error => string.Empty;
 
 		public abstract string this[string columnName] { get; }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected bool SetField<T>(ref T field, T value, string propertyName)
 		{

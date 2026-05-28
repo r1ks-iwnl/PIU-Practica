@@ -99,7 +99,7 @@ namespace WPF_Main
 					if (!DataExpirarePermis.HasValue) return "Selectați data de expirare a permisului.";
 					if (DataExpirarePermis.Value < DateTime.Today) return "Permisul este expirat.";
 				}
-				return null;
+				return string.Empty;
 			}
 		}
 
@@ -111,11 +111,10 @@ namespace WPF_Main
 	/// </summary>
 	public partial class ConducatoriView : UserControl
 	{
-		private static ConducatorModel? conducatorCurent = null;
 		private static IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
 		private static IStocareData<CursaModel> adminCurse = StocareFactory.GetAdministratorStocare<CursaModel>();
 
-		private ObservableCollection<ConducatorModel> conducatoriList;
+		private ObservableCollection<ConducatorModel> conducatoriList = new();
 		private ConducatorModel? conducatorSelectat;
 		public ConducatorFormDraft Draft { get; set; } = new ConducatorFormDraft();
 

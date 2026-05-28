@@ -33,15 +33,15 @@ namespace WPF_Main
 				set => SetField(ref _distantaText, value, nameof(DistantaText));
 		}
 
-		private MasinaModel _masinaSelectata;
-		public MasinaModel MasinaSelectata
+		private MasinaModel? _masinaSelectata;
+		public MasinaModel? MasinaSelectata
 		{
 			get => _masinaSelectata;
 				set => SetField(ref _masinaSelectata, value, nameof(MasinaSelectata));
 		}
 
-		private ConducatorModel _conducatorSelectat;
-		public ConducatorModel ConducatorSelectat
+		private ConducatorModel? _conducatorSelectat;
+		public ConducatorModel? ConducatorSelectat
 		{
 			get => _conducatorSelectat;
 				set => SetField(ref _conducatorSelectat, value, nameof(ConducatorSelectat));
@@ -89,7 +89,7 @@ namespace WPF_Main
 					if (string.IsNullOrWhiteSpace(OraStartText)) return "Ora este obligatorie.";
 					if (!TimeSpan.TryParse(OraStartText, out _)) return "Ora trebuie să fie în format valid (ex. 14:30).";
 				}
-				return null;
+				return string.Empty;
 			}
 		}
 
@@ -105,7 +105,7 @@ namespace WPF_Main
 		private static IStocareData<MasinaModel> adminMasini = StocareFactory.GetAdministratorStocare<MasinaModel>();
 		private static IStocareData<ConducatorModel> adminConducatori = StocareFactory.GetAdministratorStocare<ConducatorModel>();
 
-		private ObservableCollection<CursaModel> curseList;
+		private ObservableCollection<CursaModel> curseList = new();
 		private CursaModel? cursaSelectata;
 		public CursaFormDraft Draft { get; set; } = new CursaFormDraft();
 
@@ -162,9 +162,9 @@ namespace WPF_Main
 			{
 				int dist = int.Parse(Draft.DistantaText);
 				TimeSpan ora = TimeSpan.Parse(Draft.OraStartText);
-				DateTime startDateTime = Draft.DataStart.Value.Date + ora;
+				DateTime startDateTime = Draft.DataStart.GetValueOrDefault().Date + ora;
 
-				CursaModel nouaCursa = new CursaModel(dist, Draft.MasinaSelectata, Draft.ConducatorSelectat, startDateTime);
+				CursaModel nouaCursa = new CursaModel(dist, Draft.MasinaSelectata!, Draft.ConducatorSelectat!, startDateTime);
 				adminCurse.AdaugaElement(nouaCursa);
 				curseList.Add(nouaCursa);
 
@@ -202,9 +202,9 @@ namespace WPF_Main
 			{
 				int dist = int.Parse(Draft.DistantaText);
 				TimeSpan ora = TimeSpan.Parse(Draft.OraStartText);
-				DateTime startDateTime = Draft.DataStart.Value.Date + ora;
+				DateTime startDateTime = Draft.DataStart.GetValueOrDefault().Date + ora;
 
-				CursaModel cursaModificata = cursaSelectata.CreeazaCopieModificata(dist, Draft.MasinaSelectata, Draft.ConducatorSelectat, startDateTime);
+				CursaModel cursaModificata = cursaSelectata.CreeazaCopieModificata(dist, Draft.MasinaSelectata!, Draft.ConducatorSelectat!, startDateTime);
 				adminCurse.ActualizeazaElement(cursaModificata);
 				IncarcaDate();
 				cursaSelectata = cursaModificata;

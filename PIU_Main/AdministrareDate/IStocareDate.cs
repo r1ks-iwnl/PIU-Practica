@@ -24,12 +24,12 @@ namespace AdministrareDate
 				try
 				{
 					string jsonString = File.ReadAllText(configPath);
-					JsonNode configNode = JsonNode.Parse(jsonString);
+					JsonNode? configNode = JsonNode.Parse(jsonString);
 					if (configNode != null)
 					{
-						formatSalvare = (string)configNode["FormatSalvare"] ?? formatSalvare;
-						numeFisier = (string)configNode["NumeFisier"] ?? numeFisier;
-						directorSalvare = (string)configNode["DirectorSalvare"] ?? directorSalvare;
+						formatSalvare = configNode["FormatSalvare"]?.GetValue<string>() ?? formatSalvare;
+						numeFisier = configNode["NumeFisier"]?.GetValue<string>() ?? numeFisier;
+						directorSalvare = configNode["DirectorSalvare"]?.GetValue<string>() ?? directorSalvare;
 					}
 				}
 				catch (Exception ex)

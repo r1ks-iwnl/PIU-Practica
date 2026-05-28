@@ -54,7 +54,7 @@ namespace WPF_Main
 					if (NumarInmatriculareText.Trim().Length < 4) return "Numărul de înmatriculare pare prea scurt.";
 					if (NumarInmatriculareText.Trim().Length > 12) return "Numărul de înmatriculare pare prea lung.";
 				}
-				return null;
+				return string.Empty;
 			}
 		}
 
@@ -68,7 +68,7 @@ namespace WPF_Main
 	{
 		private static IStocareData<MasinaModel> adminMasini = StocareFactory.GetAdministratorStocare<MasinaModel>();
 		private static IStocareData<CursaModel> adminCurse = StocareFactory.GetAdministratorStocare<CursaModel>();
-		private ObservableCollection<MasinaModel> masiniList;
+		private ObservableCollection<MasinaModel> masiniList = new();
 		private MasinaModel? masinaSelectata;
 
 		public MasinaFormDraft Draft { get; set; } = new MasinaFormDraft();
